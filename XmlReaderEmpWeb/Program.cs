@@ -1,7 +1,4 @@
 using DBRepository;
-using DBRepository.Factories;
-using DBRepository.Interfaces;
-using DBRepository.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);

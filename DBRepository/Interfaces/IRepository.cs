@@ -15,11 +15,14 @@ namespace DBRepository.Interfaces
     }
     public interface IEmployeeRepository : IRepository<Employee>
     {
+
     }
-    public interface IWorksRepository : IRepository<WorkEmployee>
+    public interface IWorkRepository : IRepository<WorkEmployee>
     {
+
     }
-    public interface IFoldersRepository : IRepository<Folder>
+    public interface IFolderRepository : IRepository<Folder>
     {
+
     }
 }

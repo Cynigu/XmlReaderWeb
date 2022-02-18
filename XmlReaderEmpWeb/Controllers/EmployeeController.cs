@@ -49,7 +49,7 @@ namespace XmlReaderEmpWeb.Controllers
             {
                 return BadRequest();
             }
-            _employeeRepository.CreateAsync(emp);
+            await _employeeRepository.CreateAsync(emp);
 
             return CreatedAtRoute("getById", new { id = emp.Id }, emp);
         }
