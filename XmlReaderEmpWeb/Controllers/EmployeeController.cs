@@ -1,7 +1,6 @@
 ﻿using DBRepository;
 using DBRepository.Interfaces;
 using DBRepository.Repositories;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Models;
@@ -20,14 +19,14 @@ namespace XmlReaderEmpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("getAll")]
+        [Route("get/all")]
         public IEnumerable<Employee> Get()
         {
             IEmployeeRepository _employeeRepository = new EmployeeRepository(_contextFactory.CreateDbContext());
             return _employeeRepository.Get();
         }
         [HttpGet]
-        [Route("getById")]
+        [Route("get/{id}")]
         public async Task<IActionResult> Get(int Id)
         {
             IEmployeeRepository _employeeRepository = new EmployeeRepository(_contextFactory.CreateDbContext());
@@ -41,17 +40,43 @@ namespace XmlReaderEmpWeb.Controllers
             return new ObjectResult(emp);
         }
         [HttpPost]
-        [Route("create")]
-        public async Task<IActionResult> Create([FromBody] Employee emp) 
+        [Route("add")]
+        public async Task<IActionResult> Add([FromBody] Employee emp) 
         {
             IEmployeeRepository _employeeRepository = new EmployeeRepository(_contextFactory.CreateDbContext());
             if (emp == null)
             {
                 return BadRequest();
             }
-            await _employeeRepository.CreateAsync(emp);
+            await _employeeRepository.Add(emp);
 
-            return CreatedAtRoute("getById", new { id = emp.Id }, emp);
+            return new ObjectResult(emp);
         }
+
+        [HttpDelete]
+        [Route("remove/{id}")]
+        public async Task<IActionResult> Remove(int id)
+        {
+            IEmployeeRepository _employeeRepository = new EmployeeRepository(_contextFactory.CreateDbContext());
+
+            await _employeeRepository.Delete(id);
+
+            return new ObjectResult(id);
+        }
+
+        [HttpPut]
+        [Route("change/{id}")]
+        public async Task<IActionResult> Change(int id, [FromBody] Employee emp)
+        {
+            IEmployeeRepository _employeeRepository = new EmployeeRepository(_contextFactory.CreateDbContext());
+            if (emp == null)
+            {
+                return BadRequest();
+            }
+            await _employeeRepository.ChangeAsync(id, emp);
+
+            return new ObjectResult(emp);
+        }
+
     }
 }

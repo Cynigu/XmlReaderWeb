@@ -1,18 +1,25 @@
 ﻿using DBRepository.Interfaces;
-using Microsoft.EntityFrameworkCore;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DBRepository.Repositories
 {
-    public class EmployeeRepository : TEntityRepository<Employee>, IEmployeeRepository
+    public class EmployeeRepository : TEntityRepository<Employee, RepositoryContext>, IEmployeeRepository
     {
         public EmployeeRepository(RepositoryContext context) : base(context)
         {
+        }
+
+        public async Task ChangeAsync(int id, Employee item)
+        {
+            Employee? entity = await _repositoryContext.Employees.FindAsync(id);
+            if (entity != null)
+            {
+                entity.Works = item.Works;
+                entity.Name = item.Name;
+                entity.IsAdmin = item.IsAdmin;
+                entity.NumberPhone = item.NumberPhone;
+            }
+            await SaveAsync();
         }
     }
 }

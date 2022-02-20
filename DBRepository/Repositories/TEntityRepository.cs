@@ -8,25 +8,29 @@ using System.Threading.Tasks;
 
 namespace DBRepository.Repositories
 {
-    public class TEntityRepository<TEntity> : BaseRepository, IRepository<TEntity>
-        where TEntity : class
+    public class TEntityRepository<TEntity, TContext> : IRepository<TEntity>
+        where TEntity: class
+        where TContext : DbContext
     {
-        public TEntityRepository(RepositoryContext context) : base(context)
+        protected readonly TContext _repositoryContext;
+        public TEntityRepository(TContext context)
         {
+            _repositoryContext = context;
         }
 
-        public virtual async Task CreateAsync(TEntity item)
+        public virtual async Task Add(TEntity item)
         {
             await _repositoryContext.Set<TEntity>().AddAsync(item);
             await SaveAsync();
         }
 
-        public virtual async Task DeleteAsync(int id)
+        public virtual async Task<TEntity> Delete(int id)
         {
             TEntity? entity = await _repositoryContext.Set<TEntity>().FindAsync(id);
             if (entity != null)
                 _repositoryContext.Set<TEntity>().Remove(entity);
             await SaveAsync();
+            return entity;
         }
 
         public virtual IEnumerable<TEntity> Get()
@@ -67,10 +71,11 @@ namespace DBRepository.Repositories
 
         }
 
-        public virtual void Update(TEntity item)
+        public async virtual Task Update(TEntity item)
         {
 
             _repositoryContext.Entry(item).State = EntityState.Modified;
+            await SaveAsync();
         }
     }
 }
