@@ -9,18 +9,5 @@ namespace DBRepository.Repositories
         public FoldersRepository(RepositoryContext context) : base(context)
         {
         }
-
-        public async Task ChangeAsync(int id, Folder item)
-        {
-            Folder? entity = await _repositoryContext.Folders.FindAsync(id);
-            if (entity != null)
-            {
-                entity.CountXmlFiles = item.CountXmlFiles;
-                entity.CountFiles = item.CountFiles;
-                entity.CountObject = item.CountObject;
-                entity.PathFolder = item.PathFolder;
-            }
-            await SaveAsync();
-        }
     }
 }

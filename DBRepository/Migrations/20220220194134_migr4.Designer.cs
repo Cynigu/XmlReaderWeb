@@ -4,6 +4,7 @@ using DBRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220220194134_migr4")]
+    partial class migr4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -45,15 +47,6 @@ namespace DBRepository.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AuthUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Login = "admin",
-                            Password = "qwerty123",
-                            Role = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Models.Employee", b =>

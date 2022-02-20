@@ -1,5 +1,6 @@
 ﻿
 using Models;
+using Models.auth;
 
 namespace DBRepository.Interfaces
 {
@@ -16,15 +17,14 @@ namespace DBRepository.Interfaces
     }
     public interface IEmployeeRepository : IRepository<Employee>
     {
-        Task ChangeAsync(int id, Employee item);
-
     }
     public interface IWorkRepository : IRepository<WorkEmployee>
     {
-        Task ChangeAsync(int id, WorkEmployee item);
     }
     public interface IFolderRepository : IRepository<Folder>
     {
-        Task ChangeAsync(int id , Folder item);
+    }
+    public interface IAuthUserRepository : IRepository<AuthUser>
+    {
     }
 }

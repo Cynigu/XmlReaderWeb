@@ -9,17 +9,5 @@ namespace DBRepository.Repositories
         {
         }
 
-        public async Task ChangeAsync(int id, Employee item)
-        {
-            Employee? entity = await _repositoryContext.Employees.FindAsync(id);
-            if (entity != null)
-            {
-                entity.Works = item.Works;
-                entity.Name = item.Name;
-                entity.IsAdmin = item.IsAdmin;
-                entity.NumberPhone = item.NumberPhone;
-            }
-            await SaveAsync();
-        }
     }
 }

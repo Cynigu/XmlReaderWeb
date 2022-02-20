@@ -17,8 +17,6 @@ namespace XmlReaderEmpWeb.Server.Controllers
         {
             this._repository = repository;
         }
-
-
         // GET: api/[controller]
         [HttpGet]
         public ActionResult<IEnumerable<TEntity>> Get()
