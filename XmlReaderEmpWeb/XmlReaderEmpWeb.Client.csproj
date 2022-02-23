@@ -27,8 +27,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBRepository\DBRepository.csproj" />
-    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\DBRepository\XmlReader.DBRepository.csproj" />
+    <ProjectReference Include="..\Models\XmlReader.Models.csproj" />
   </ItemGroup>
 
   <ItemGroup>

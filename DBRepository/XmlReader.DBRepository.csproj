@@ -7,12 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Factories\**" />
-    <EmbeddedResource Remove="Factories\**" />
-    <None Remove="Factories\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Interfaces\IRepositoryContextFactory.cs" />
   </ItemGroup>
 
@@ -26,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\Models.csproj" />
+    <ProjectReference Include="..\Models\XmlReader.Models.csproj" />
   </ItemGroup>
 
 </Project>

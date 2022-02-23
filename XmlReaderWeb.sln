@@ -3,15 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReaderEmpWeb.Server", "XmlReaderEmpWeb\XmlReaderEmpWeb.Server.csproj", "{3C83F857-D9D1-4DCD-A299-B9E0AE5B8B62}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReaderEmpWeb.Client", "XmlReaderEmpWeb\XmlReaderEmpWeb.Client.csproj", "{3C83F857-D9D1-4DCD-A299-B9E0AE5B8B62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBRepository", "DBRepository\DBRepository.csproj", "{21CA891C-4A89-4F99-86D5-FFE3259F18CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.DBRepository", "DBRepository\XmlReader.DBRepository.csproj", "{21CA891C-4A89-4F99-86D5-FFE3259F18CA}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Computing", "Computing\Computing.csproj", "{D82EC366-1D39-428C-9E26-AB0352EA5E37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.BLL", "Computing\XmlReader.BLL.csproj", "{D82EC366-1D39-428C-9E26-AB0352EA5E37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "Models\Models.csproj", "{1BA5574D-5338-471C-90C4-887FED514C4B}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlReaderWebClient", "XmlReaderWebClient\XmlReaderWebClient.csproj", "{7AB84285-627E-4FD5-9985-7A26631B1358}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.Models", "Models\XmlReader.Models.csproj", "{1BA5574D-5338-471C-90C4-887FED514C4B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +33,6 @@ Global
 		{1BA5574D-5338-471C-90C4-887FED514C4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1BA5574D-5338-471C-90C4-887FED514C4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1BA5574D-5338-471C-90C4-887FED514C4B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7AB84285-627E-4FD5-9985-7A26631B1358}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7AB84285-627E-4FD5-9985-7A26631B1358}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7AB84285-627E-4FD5-9985-7A26631B1358}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7AB84285-627E-4FD5-9985-7A26631B1358}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

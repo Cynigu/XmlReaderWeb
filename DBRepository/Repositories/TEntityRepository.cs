@@ -1,5 +1,6 @@
 ﻿using DBRepository.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 namespace DBRepository.Repositories
 {
     public class TEntityRepository<TEntity, TContext> : IRepository<TEntity>
-        where TEntity: class
+        where TEntity:  class, IEntity
         where TContext : DbContext
     {
         protected readonly TContext _repositoryContext;
@@ -31,6 +32,11 @@ namespace DBRepository.Repositories
                 _repositoryContext.Set<TEntity>().Remove(entity);
             await SaveAsync();
             return entity;
+        }
+
+        public IEnumerable<TEntity> Find(Func<TEntity, bool> predicate)
+        {
+            return _repositoryContext.Set<TEntity>().Where(predicate);
         }
 
         public virtual IEnumerable<TEntity> Get()

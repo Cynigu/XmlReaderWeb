@@ -1,8 +1,6 @@
-﻿
-
-namespace Models
+﻿namespace XmlReaderEmpWeb.Models
 {
-    public class FolderDTO: IEntity
+    public class FolderModel : IEntityModel
     {
         public int Id { get; set; }
         public string PathFolder { get; set; }

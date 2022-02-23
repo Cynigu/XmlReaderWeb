@@ -4,7 +4,7 @@ using Models;
 
 namespace XmlReaderEmpWeb.Server.Controllers
 {
-    public class WorkController : TEntityController<WorkEmployee, IWorkRepository>
+    public class WorkController : BaseMethodsController<WorkEmployee, IWorkRepository>
     {
         public WorkController(IWorkRepository repository) : base(repository)
         {

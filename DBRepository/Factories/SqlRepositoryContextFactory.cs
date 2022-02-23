@@ -5,10 +5,16 @@ namespace DBRepository.Factories
 {
     public class SqlRepositoryContextFactory : IRepositoryContextFactory
     {
-        public RepositoryContext CreateDbContext(string connectionString)
+        private readonly string _connectionString;
+        public SqlRepositoryContextFactory(string connectionString)
+        {
+            _connectionString = connectionString;
+        }
+
+        public RepositoryContext Create()
         {
             var optionsBuilder = new DbContextOptionsBuilder<RepositoryContext>();
-            optionsBuilder.UseSqlServer(connectionString);
+            optionsBuilder.UseSqlServer(_connectionString);
 
             return new RepositoryContext(optionsBuilder.Options);
         }

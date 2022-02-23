@@ -9,7 +9,7 @@ namespace XmlReaderEmpWeb.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class EmployeeController : TEntityController<Employee, IEmployeeRepository>
+    public class EmployeeController : BaseMethodsController<Employee, IEmployeeRepository>
     {
         public EmployeeController(IEmployeeRepository repository) : base(repository)
         {

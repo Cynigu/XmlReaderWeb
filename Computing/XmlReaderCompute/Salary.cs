@@ -1,4 +1,4 @@
-﻿namespace Computing
+﻿namespace XmlReader.BLL.Compute
 {
     internal class Salary
     {

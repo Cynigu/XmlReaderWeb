@@ -7,16 +7,17 @@ namespace XmlReaderEmpWeb.Server.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TEntityController<TEntity, TRepository> : ControllerBase
+    public class BaseMethodsController<TEntity, TRepository> : ControllerBase
         where TEntity : class, IEntity
         where TRepository : IRepository<TEntity>
     {
         private readonly TRepository _repository;
 
-        public TEntityController(TRepository repository)
+        public BaseMethodsController(TRepository repository)
         {
             this._repository = repository;
         }
+
         // GET: api/[controller]
         [HttpGet]
         public ActionResult<IEnumerable<TEntity>> Get()

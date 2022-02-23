@@ -1,11 +1,9 @@
-﻿
-
-namespace Models
+﻿namespace XmlReader.BLL.DTO
 {
     /// <summary>
     /// Рабочая среда - у одного сотрудника может быть несколько работ
     /// </summary>
-    public class WorkEmployeeDTO : IEntity
+    public class WorkEmployeeDTO : IEntityDTO
     {
         public int Id { get; set; }
         public string Description { get; set; }
@@ -19,6 +17,6 @@ namespace Models
         public float SalaryPaid { get; set; } // Зарплата уплаченная
         public bool IsGetSalary { get; set; }
         public bool IsEnd { get; set; }
-        public ICollection<Folder>? Folders { get; set; }
+        public ICollection<FolderDTO>? Folders { get; set; }
     }
 }

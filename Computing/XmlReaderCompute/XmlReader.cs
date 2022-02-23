@@ -4,7 +4,7 @@ using System.IO;
 using System.Xml;
 using System.Xml.Linq;
 
-namespace Computing
+namespace XmlReader.BLL.Compute
 {
     // var paths = Directory.EnumerateFiles(@PathFolder, "*.xml");
 

@@ -4,7 +4,7 @@ using Models;
 
 namespace XmlReaderEmpWeb.Server.Controllers
 {
-    public class FolderController : TEntityController<Folder, IFolderRepository>
+    public class FolderController : BaseMethodsController<Folder, IFolderRepository>
     {
         public FolderController(IFolderRepository repository) : base(repository)
         {
