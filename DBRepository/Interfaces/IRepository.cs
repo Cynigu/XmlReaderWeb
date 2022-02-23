@@ -1,8 +1,4 @@
-﻿
-using Models;
-using Models.auth;
-
-namespace DBRepository.Interfaces
+﻿namespace DBRepository.Interfaces
 {
     public interface IRepository<T> 
         where T : class
@@ -14,17 +10,5 @@ namespace DBRepository.Interfaces
         Task Update(T item); // обновление объекта
         Task<T> Delete(int id); // удаление объекта по id
         Task SaveAsync();  // сохранение изменений
-    }
-    public interface IEmployeeRepository : IRepository<Employee>
-    {
-    }
-    public interface IWorkRepository : IRepository<WorkEmployee>
-    {
-    }
-    public interface IFolderRepository : IRepository<Folder>
-    {
-    }
-    public interface IAuthUserRepository : IRepository<AuthUser>
-    {
     }
 }

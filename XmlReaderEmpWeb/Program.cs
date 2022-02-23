@@ -46,7 +46,7 @@ builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddDbContext<RepositoryContext>(options =>options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 builder.Services.AddScoped<IFolderRepository, FoldersRepository>();
-builder.Services.AddScoped<IWorkRepository, WorkEmpRepository>();
+builder.Services.AddScoped<IWorkRepository, WorkRepository>();
 builder.Services.AddScoped<IAuthUserRepository, AuthUserRepository>();
 
 var app = builder.Build();
