@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DBRepository.Migrations
+namespace XmlReader.Data.DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220218222810_NewRowInEmployee")]
-    partial class NewRowInEmployee
+    [Migration("20220223220915_nt")]
+    partial class nt
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,40 @@ namespace DBRepository.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("Models.auth.AuthUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuthUsers");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Login = "admin",
+                            Password = "qwerty123",
+                            Role = "admin"
+                        });
+                });
 
             modelBuilder.Entity("Models.Employee", b =>
                 {
@@ -40,7 +74,6 @@ namespace DBRepository.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NumberPhone")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -69,12 +102,12 @@ namespace DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WorkEmployeeId")
+                    b.Property<int>("WorkId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkEmployeeId");
+                    b.HasIndex("WorkId");
 
                     b.ToTable("Folders");
                 });
@@ -109,7 +142,7 @@ namespace DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsEnd")
@@ -130,16 +163,24 @@ namespace DBRepository.Migrations
 
             modelBuilder.Entity("Models.Folder", b =>
                 {
-                    b.HasOne("Models.WorkEmployee", null)
+                    b.HasOne("Models.WorkEmployee", "Work")
                         .WithMany("Folders")
-                        .HasForeignKey("WorkEmployeeId");
+                        .HasForeignKey("WorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Work");
                 });
 
             modelBuilder.Entity("Models.WorkEmployee", b =>
                 {
-                    b.HasOne("Models.Employee", null)
+                    b.HasOne("Models.Employee", "Employee")
                         .WithMany("Works")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Models.Employee", b =>

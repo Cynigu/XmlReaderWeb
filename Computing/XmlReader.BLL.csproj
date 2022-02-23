@@ -11,8 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBRepository\XmlReader.DBRepository.csproj" />
-    <ProjectReference Include="..\XmlReaderEmpWeb\XmlReaderEmpWeb.Client.csproj" />
+    <ProjectReference Include="..\DBRepository\XmlReader.Data.DBRepository.csproj" />
   </ItemGroup>
 
 </Project>

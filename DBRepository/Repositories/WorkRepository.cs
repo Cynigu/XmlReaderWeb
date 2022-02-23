@@ -9,5 +9,6 @@ namespace DBRepository.Repositories
         public WorkRepository(RepositoryContext context) : base(context)
         {
         }
+
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace XmlReaderEmpWeb.Models
+﻿using XmlReader.BLL.DTO;
+
+namespace XmlReaderEmpWeb.Models
 {
     public class EmployeeModel: IEntityModel
     {

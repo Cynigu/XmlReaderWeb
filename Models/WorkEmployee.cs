@@ -20,5 +20,6 @@ namespace Models
         public bool IsGetSalary { get; set; }
         public bool IsEnd { get; set; }
         public ICollection<Folder>? Folders { get; set; }
+        public Employee Employee { get; set; }
     }
 }

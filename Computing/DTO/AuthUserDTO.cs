@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models.auth
+namespace XmlReader.BLL.DTO
 {
-    public class AuthUser: IEntity
+    public class AuthUserDTO: IEntityDTO
     {
         public int Id { get; set; }
         public string Login { get; set; }

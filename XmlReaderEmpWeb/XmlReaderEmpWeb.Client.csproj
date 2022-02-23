@@ -27,12 +27,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DBRepository\XmlReader.DBRepository.csproj" />
-    <ProjectReference Include="..\Models\XmlReader.Models.csproj" />
+    <Folder Include="Controllers\Abstract\" />
+    <Folder Include="Controllers\FolderControllers\" />
+    <Folder Include="Controllers\WorkControllers\" />
+    <Folder Include="Views\Employee\" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Employee\" />
+    <ProjectReference Include="..\Computing\XmlReader.BLL.csproj" />
   </ItemGroup>
 
 </Project>

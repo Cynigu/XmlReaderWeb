@@ -5,11 +5,13 @@ VisualStudioVersion = 17.0.32112.339
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReaderEmpWeb.Client", "XmlReaderEmpWeb\XmlReaderEmpWeb.Client.csproj", "{3C83F857-D9D1-4DCD-A299-B9E0AE5B8B62}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.DBRepository", "DBRepository\XmlReader.DBRepository.csproj", "{21CA891C-4A89-4F99-86D5-FFE3259F18CA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.Data.DBRepository", "DBRepository\XmlReader.Data.DBRepository.csproj", "{21CA891C-4A89-4F99-86D5-FFE3259F18CA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.BLL", "Computing\XmlReader.BLL.csproj", "{D82EC366-1D39-428C-9E26-AB0352EA5E37}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.Models", "Models\XmlReader.Models.csproj", "{1BA5574D-5338-471C-90C4-887FED514C4B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.Data.Models", "Models\XmlReader.Data.Models.csproj", "{1BA5574D-5338-471C-90C4-887FED514C4B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "XmlReader.Data", "XmlReader.Data", "{0154BB00-D542-4C93-9148-28051647258F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +38,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{21CA891C-4A89-4F99-86D5-FFE3259F18CA} = {0154BB00-D542-4C93-9148-28051647258F}
+		{1BA5574D-5338-471C-90C4-887FED514C4B} = {0154BB00-D542-4C93-9148-28051647258F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {49F36CE2-0B04-4836-9F5D-A0B1E556128F}

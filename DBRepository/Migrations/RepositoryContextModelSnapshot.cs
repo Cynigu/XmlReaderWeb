@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace DBRepository.Migrations
+namespace XmlReader.Data.DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot
@@ -100,12 +100,12 @@ namespace DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("WorkEmployeeId")
+                    b.Property<int>("WorkId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("WorkEmployeeId");
+                    b.HasIndex("WorkId");
 
                     b.ToTable("Folders");
                 });
@@ -140,7 +140,7 @@ namespace DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("EmployeeId")
+                    b.Property<int>("EmployeeId")
                         .HasColumnType("int");
 
                     b.Property<bool>("IsEnd")
@@ -161,16 +161,24 @@ namespace DBRepository.Migrations
 
             modelBuilder.Entity("Models.Folder", b =>
                 {
-                    b.HasOne("Models.WorkEmployee", null)
+                    b.HasOne("Models.WorkEmployee", "Work")
                         .WithMany("Folders")
-                        .HasForeignKey("WorkEmployeeId");
+                        .HasForeignKey("WorkId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Work");
                 });
 
             modelBuilder.Entity("Models.WorkEmployee", b =>
                 {
-                    b.HasOne("Models.Employee", null)
+                    b.HasOne("Models.Employee", "Employee")
                         .WithMany("Works")
-                        .HasForeignKey("EmployeeId");
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("Models.Employee", b =>

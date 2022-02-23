@@ -1,11 +1,10 @@
-using DBRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.ResponseCompression;
-using DBRepository.Repositories;
-using DBRepository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using XmlReaderEmpWeb.Server.auth;
+using XmlReader.BLL.Interfaces;
+using XmlReader.BLL.Services;
+using DBRepository.Factories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -40,23 +39,13 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddEndpointsApiExplorer();
-//builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-builder.Services.AddDbContext<RepositoryContext>(options =>options.UseSqlServer(connectionString));
-builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
-builder.Services.AddScoped<IFolderRepository, FoldersRepository>();
-builder.Services.AddScoped<IWorkRepository, WorkRepository>();
-builder.Services.AddScoped<IAuthUserRepository, AuthUserRepository>();
+builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryContextFactory(connectionString));
+builder.Services.AddScoped<IEmployeeBaseService, EmployeeBaseService>();
 
 var app = builder.Build();
-
-using (var serviceScope = app.Services.CreateScope())
-{
-    var services = serviceScope.ServiceProvider;
-    var factory = services.GetRequiredService<RepositoryContext>();
-    factory.Database.Migrate();
-}
 
 // Configure the HTTP request pipeline.
 app.UseMvc(routes =>
@@ -70,12 +59,12 @@ if (app.Environment.IsDevelopment())
 {
     // то выводим информацию об ошибке, при наличии ошибки
     app.UseDeveloperExceptionPage();
-    //app.UseSwagger();
-    //app.UseSwaggerUI(options =>
-    //{
-    //    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-    //    options.RoutePrefix = string.Empty;
-    //});
+    app.UseSwagger();
+    app.UseSwaggerUI(options =>
+    {
+        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        options.RoutePrefix = string.Empty;
+    });
 }
 if (!app.Environment.IsDevelopment())
 {

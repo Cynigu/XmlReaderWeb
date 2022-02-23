@@ -1,11 +1,6 @@
 ﻿using DBRepository.Factories;
 using DBRepository.UOW;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XmlReader.BLL.DTO;
 using XmlReader.BLL.Interfaces;
 using XmlReader.BLL.Mapper;
@@ -44,7 +39,7 @@ namespace XmlReader.BLL.Services
             IEnumerable<Employee> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                emp = uow.EmployeeRepository.Get();
+                emp = uow.EmployeeRepository.Get().ToList();
             }
             return emp.Select(x=>x.ToDTO());
         }
