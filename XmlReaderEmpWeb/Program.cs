@@ -1,4 +1,8 @@
+using DBRepository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.ResponseCompression;
+using DBRepository.Repositories;
+using DBRepository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using XmlReaderEmpWeb.Server.auth;
@@ -42,10 +46,19 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
+builder.Services.AddDbContext<RepositoryContext>(options =>options.UseSqlServer(connectionString));
+
 builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryContextFactory(connectionString));
 builder.Services.AddScoped<IEmployeeBaseService, EmployeeBaseService>();
 
 var app = builder.Build();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+    var factory = services.GetRequiredService<RepositoryContext>();
+    factory.Database.Migrate();
+}
 
 // Configure the HTTP request pipeline.
 app.UseMvc(routes =>
