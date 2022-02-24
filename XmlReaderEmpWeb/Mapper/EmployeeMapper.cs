@@ -16,6 +16,8 @@ namespace XmlReaderEmpWeb.Client.Mapper
                 Works = emp.Works?.Select(x => x.ToModel()).ToList(),
                 NumberPhone = emp.NumberPhone,
                 IsAdmin = emp.IsAdmin
+                Email = emp.Email,
+                Vk = emp.Vk,
             };
         }
         public static EmployeeDTO ToDTO(this EmployeeModel emp)
@@ -28,7 +30,9 @@ namespace XmlReaderEmpWeb.Client.Mapper
                 Name = emp.Name,
                 Works = emp.Works?.Select(x => x.ToDTO()).ToList(),
                 NumberPhone = emp.NumberPhone,
-                IsAdmin = emp.IsAdmin
+                IsAdmin = emp.IsAdmin,
+                Email = emp.Email,
+                Vk = emp.Vk,
             };
         }
     }

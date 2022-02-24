@@ -1,14 +1,12 @@
 using DBRepository;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.ResponseCompression;
-using DBRepository.Repositories;
-using DBRepository.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using XmlReaderEmpWeb.Server.auth;
 using XmlReader.BLL.Interfaces;
 using XmlReader.BLL.Services;
 using DBRepository.Factories;
+using XmlReader.BLL.Services.FolderServices;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -46,10 +44,11 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 
-builder.Services.AddDbContext<RepositoryContext>(options =>options.UseSqlServer(connectionString));
-
+builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryContextFactory(connectionString));
 builder.Services.AddScoped<IEmployeeBaseService, EmployeeBaseService>();
+builder.Services.AddScoped<IFolderBaseService, FolderBaseService>();
+builder.Services.AddScoped<IWorkBaseService, WorkBaseService>();
 
 var app = builder.Build();
 
@@ -86,6 +85,7 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
+//AutofacConfig.ConfigureContainer(connectionString);
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseDefaultFiles();

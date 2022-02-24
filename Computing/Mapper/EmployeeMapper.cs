@@ -20,7 +20,9 @@ namespace XmlReader.BLL.Mapper
                 Name = emp.Name,
                 Works = emp.Works?.Select(x=>x.ToDTO()).ToList(),
                 NumberPhone = emp.NumberPhone,
-                IsAdmin = emp.IsAdmin
+                IsAdmin = emp.IsAdmin,
+                Email = emp.Email,
+                Vk = emp.Vk,
             };
         }
 
@@ -34,7 +36,9 @@ namespace XmlReader.BLL.Mapper
                 Name = emp.Name,
                 Works = emp.Works?.Select(x => x.ToEntity()).ToList(),
                 NumberPhone = emp.NumberPhone,
-                IsAdmin = emp.IsAdmin
+                IsAdmin = emp.IsAdmin,
+                Email = emp.Email,
+                Vk = emp.Vk,
             };
         }
     }

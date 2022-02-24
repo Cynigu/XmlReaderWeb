@@ -7,6 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="6.3.0" />
+    <PackageReference Include="Autofac.Mvc5" Version="6.0.0" />
+    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
@@ -28,8 +31,6 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Abstract\" />
-    <Folder Include="Controllers\FolderControllers\" />
-    <Folder Include="Controllers\WorkControllers\" />
     <Folder Include="Views\Employee\" />
   </ItemGroup>
 
