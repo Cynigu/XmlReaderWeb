@@ -15,7 +15,7 @@ namespace XmlReaderEmpWeb.Client.Mapper
                 Name = emp.Name,
                 Works = emp.Works?.Select(x => x.ToModel()).ToList(),
                 NumberPhone = emp.NumberPhone,
-                IsAdmin = emp.IsAdmin
+                IsAdmin = emp.IsAdmin,
                 Email = emp.Email,
                 Vk = emp.Vk,
             };
