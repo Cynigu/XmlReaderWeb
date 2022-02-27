@@ -1,4 +1,4 @@
-﻿namespace XmlReaderEmpWeb.Models
+﻿namespace XmlReader.WEB.Models
 {
     /// <summary>
     /// Рабочая среда - у одного сотрудника может быть несколько работ

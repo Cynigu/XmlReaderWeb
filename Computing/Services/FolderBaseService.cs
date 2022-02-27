@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using XmlReader.BLL.DTO;
-using XmlReader.BLL.Mapper;
+using XmlReader.BLL.Mapper.ToEntity;
 
 namespace XmlReader.BLL.Services.FolderServices
 {

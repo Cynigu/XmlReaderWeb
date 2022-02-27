@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using XmlReader.BLL.Interfaces;
-using XmlReaderEmpWeb.Client.Mapper;
-using XmlReaderEmpWeb.Models;
+using XmlReader.BLL.Mapper.ToModel;
+using XmlReader.WEB.Models;
 
-namespace XmlReaderEmpWeb.Client.Controllers.EmployeeControllers
+namespace XmlReader.WEB.Controllers.EmployeeControllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
-    public class EmployeeBaseController: Controller
+    public class EmployeeBaseController : Controller
     {
         private readonly IEmployeeBaseService _employeeBaseService;
 
@@ -16,7 +16,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.EmployeeControllers
             this._employeeBaseService = empService;
         }
         // GET: api/[controller]
-        [HttpGet("get")]
+        [HttpGet]
         public ActionResult<IEnumerable<EmployeeModel>> Get()
         {
             var emps = _employeeBaseService.Get();
@@ -24,7 +24,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.EmployeeControllers
         }
 
         // GET: api/[controller]/5
-        [HttpGet("get/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<EmployeeModel>> Get(int id)
         {
             var entity = await _employeeBaseService.Get(id);
@@ -32,11 +32,11 @@ namespace XmlReaderEmpWeb.Client.Controllers.EmployeeControllers
             {
                 return NotFound();
             }
-            return entity.ToModel() ;
+            return entity.ToModel();
         }
 
         // PUT: api/[controller]/5
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] EmployeeModel entity)
         {
             if (id != entity.Id)
@@ -56,7 +56,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.EmployeeControllers
         }
 
         // DELETE: api/[controller]/5
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<EmployeeModel>> Delete(int id)
         {
             var entity = await _employeeBaseService.Delete(id);

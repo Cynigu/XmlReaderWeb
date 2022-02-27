@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XmlReaderEmpWeb.Models
+namespace XmlReader.WEB.Models
 {
     public interface IEntityModel
     {

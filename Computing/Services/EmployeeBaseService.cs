@@ -3,7 +3,7 @@ using DBRepository.UOW;
 using Models;
 using XmlReader.BLL.DTO;
 using XmlReader.BLL.Interfaces;
-using XmlReader.BLL.Mapper;
+using XmlReader.BLL.Mapper.ToEntity;
 
 namespace XmlReader.BLL.Services
 {

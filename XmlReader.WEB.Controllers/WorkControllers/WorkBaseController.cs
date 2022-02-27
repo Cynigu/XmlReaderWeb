@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using XmlReader.BLL.Interfaces;
-using XmlReaderEmpWeb.Client.Mapper;
-using XmlReaderEmpWeb.Models;
+using XmlReader.BLL.Mapper.ToModel;
+using XmlReader.WEB.Models;
 
-namespace XmlReaderEmpWeb.Client.Controllers.WorkControllers
+namespace XmlReader.WEB.Controllers.WorkControllers
 {
+    [Route("api/[controller]/[action]")]
+    [ApiController]
     public class WorkBaseController : Controller
     {
         private readonly IWorkBaseService _workBaseService;
@@ -14,7 +16,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.WorkControllers
             this._workBaseService = empService;
         }
         // GET: api/[controller]
-        [HttpGet("get")]
+        [HttpGet]
         public ActionResult<IEnumerable<WorkEmployeeModel>> Get()
         {
             var emps = _workBaseService.Get();
@@ -22,7 +24,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.WorkControllers
         }
 
         // GET: api/[controller]/5
-        [HttpGet("get/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<WorkEmployeeModel>> Get(int id)
         {
             var entity = await _workBaseService.Get(id);
@@ -34,7 +36,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.WorkControllers
         }
 
         // PUT: api/[controller]/5
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] WorkEmployeeModel entity)
         {
             if (id != entity.Id)
@@ -54,7 +56,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.WorkControllers
         }
 
         // DELETE: api/[controller]/5
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<WorkEmployeeModel>> Delete(int id)
         {
             var entity = await _workBaseService.Delete(id);

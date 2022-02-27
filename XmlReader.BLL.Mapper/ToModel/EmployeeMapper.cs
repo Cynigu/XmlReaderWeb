@@ -1,16 +1,26 @@
-﻿using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XmlReader.BLL.DTO;
+﻿using XmlReader.BLL.DTO;
+using XmlReader.WEB.Models;
 
-namespace XmlReader.BLL.Mapper
+namespace XmlReader.BLL.Mapper.ToModel
 {
     public static class EmployeeMapper
     {
-        public static EmployeeDTO ToDTO(this Employee emp)
+        public static EmployeeModel ToModel(this EmployeeDTO emp)
+        {
+            if (emp == null)
+                return null;
+            return new EmployeeModel
+            {
+                Id = emp.Id,
+                Name = emp.Name,
+                Works = emp.Works?.Select(x => x.ToModel()).ToList(),
+                NumberPhone = emp.NumberPhone,
+                IsAdmin = emp.IsAdmin,
+                Email = emp.Email,
+                Vk = emp.Vk,
+            };
+        }
+        public static EmployeeDTO ToDTO(this EmployeeModel emp)
         {
             if (emp == null)
                 return null;
@@ -18,23 +28,7 @@ namespace XmlReader.BLL.Mapper
             {
                 Id = emp.Id,
                 Name = emp.Name,
-                Works = emp.Works?.Select(x=>x.ToDTO()).ToList(),
-                NumberPhone = emp.NumberPhone,
-                IsAdmin = emp.IsAdmin,
-                Email = emp.Email,
-                Vk = emp.Vk,
-            };
-        }
-
-        public static Employee ToEntity(this EmployeeDTO emp)
-        {
-            if (emp == null)
-                return null;
-            return new Employee
-            {
-                Id = emp.Id,
-                Name = emp.Name,
-                Works = emp.Works?.Select(x => x.ToEntity()).ToList(),
+                Works = emp.Works?.Select(x => x.ToDTO()).ToList(),
                 NumberPhone = emp.NumberPhone,
                 IsAdmin = emp.IsAdmin,
                 Email = emp.Email,

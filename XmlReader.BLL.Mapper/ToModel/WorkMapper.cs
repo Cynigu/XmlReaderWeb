@@ -1,7 +1,6 @@
 ﻿using XmlReader.BLL.DTO;
-using XmlReaderEmpWeb.Models;
-
-namespace XmlReaderEmpWeb.Client.Mapper
+using XmlReader.WEB.Models;
+namespace XmlReader.BLL.Mapper.ToModel
 {
     public static class WorkMapper
     {

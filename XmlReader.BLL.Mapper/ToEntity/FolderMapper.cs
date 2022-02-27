@@ -1,15 +1,15 @@
-﻿using XmlReader.BLL.DTO;
-using XmlReaderEmpWeb.Models;
+﻿using Models;
+using XmlReader.BLL.DTO;
 
-namespace XmlReaderEmpWeb.Client.Mapper
+namespace XmlReader.BLL.Mapper.ToEntity
 {
     public static class FolderMapper
     {
-        public static FolderModel ToModel(this FolderDTO emp)
+        public static FolderDTO ToDTO(this Folder emp)
         {
             if (emp == null)
                 return null;
-            return new FolderModel
+            return new FolderDTO
             {
                 Id = emp.Id,
                 PathFolder = emp.PathFolder,
@@ -18,11 +18,12 @@ namespace XmlReaderEmpWeb.Client.Mapper
                 CountXmlFiles = emp.CountXmlFiles,
             };
         }
-        public static FolderDTO ToDTO(this FolderModel emp)
+
+        public static Folder ToEntity(this FolderDTO emp)
         {
             if (emp == null)
                 return null;
-            return new FolderDTO
+            return new Folder
             {
                 Id = emp.Id,
                 PathFolder = emp.PathFolder,

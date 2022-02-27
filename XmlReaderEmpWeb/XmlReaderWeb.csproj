@@ -7,9 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Employee\**" />
+    <Content Remove="Views\Employee\**" />
+    <EmbeddedResource Remove="Views\Employee\**" />
+    <None Remove="Views\Employee\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Autofac" Version="6.3.0" />
-    <PackageReference Include="Autofac.Mvc5" Version="6.0.0" />
-    <PackageReference Include="Microsoft.AspNet.Mvc" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
@@ -30,12 +35,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Abstract\" />
-    <Folder Include="Views\Employee\" />
+    <ProjectReference Include="..\Computing\XmlReader.BLL.Service.csproj" />
+    <ProjectReference Include="..\XmlReader.WEB.Controllers\XmlReader.WEB.Controllers.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Computing\XmlReader.BLL.csproj" />
+    <Folder Include="Views\EmployeeBase\" />
+    <Folder Include="Views\Shared\" />
+    <Folder Include="Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\ListWork.html" />
   </ItemGroup>
 
 </Project>

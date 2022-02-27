@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using XmlReader.BLL.Interfaces;
+using XmlReader.BLL.Mapper.ToModel;
 using XmlReader.BLL.Services.FolderServices;
-using XmlReaderEmpWeb.Client.Mapper;
-using XmlReaderEmpWeb.Models;
+using XmlReader.WEB.Models;
 
-namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
+namespace XmlReader.WEB.Controllers.FolderControllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class FolderBaseController : Controller
     {
@@ -17,7 +16,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
             this._folderBaseService = empService;
         }
         // GET: api/[controller]
-        [HttpGet("get")]
+        [HttpGet]
         public ActionResult<IEnumerable<FolderModel>> Get()
         {
             var emps = _folderBaseService.Get();
@@ -25,7 +24,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
         }
 
         // GET: api/[controller]/5
-        [HttpGet("get/{id}")]
+        [HttpGet("{id}")]
         public async Task<ActionResult<FolderModel>> Get(int id)
         {
             var entity = await _folderBaseService.Get(id);
@@ -37,7 +36,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
         }
 
         // PUT: api/[controller]/5
-        [HttpPut("update/{id}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] FolderModel entity)
         {
             if (id != entity.Id)
@@ -49,7 +48,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
         }
 
         // POST: api/[controller]
-        [HttpPost("add")]
+        [HttpPost]
         public async Task<ActionResult<FolderModel>> Post([FromBody] FolderModel entity)
         {
             await _folderBaseService.Add(entity.ToDTO());
@@ -57,7 +56,7 @@ namespace XmlReaderEmpWeb.Client.Controllers.FolderControllers
         }
 
         // DELETE: api/[controller]/5
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult<FolderModel>> Delete(int id)
         {
             var entity = await _folderBaseService.Delete(id);

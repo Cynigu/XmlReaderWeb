@@ -12,6 +12,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DBRepository\XmlReader.Data.DBRepository.csproj" />
+    <ProjectReference Include="..\XmlReader.BLL.DTO\XmlReader.BLL.DTO.csproj" />
+    <ProjectReference Include="..\XmlReader.BLL.Mapper\XmlReader.BLL.Mapper.csproj" />
   </ItemGroup>
 
 </Project>

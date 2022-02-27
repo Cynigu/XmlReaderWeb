@@ -1,7 +1,7 @@
 ﻿using Models;
 using XmlReader.BLL.DTO;
 
-namespace XmlReader.BLL.Mapper
+namespace XmlReader.BLL.Mapper.ToEntity
 {
     public static class WorkMapper
     {
