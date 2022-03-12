@@ -1,24 +1,39 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
+    <meta name="viewport">
+    <meta charset="utf-8" lang="ru" />
+    <!--<link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@1,300&family=Roboto:wght@100&display=swap" rel="stylesheet"/>-->
+    <link rel="stylesheet" href="css/site.css" type="text/css" />
     <title>Список пользователей</title>
 </head>
 <body>
+    
+<img src="images\—Pngtree—abstract circle technology background_3527873.png" alt="Моё тестовое изображение" width="200" height="200">
+<div class="form">
     <h2>Список пользователей</h2>
-    <form action="api/employeebase/get" method="post" name="employee">
-        <label>
-            Имя: <input type="text" placeholder="имя" name="name" />
-        </label>
-        <label>
-            Email: <input type="text" placeholder="email" name="email" />
-        </label>
-        <label>
-            Vk: <input type="text" placeholder="vk.com" name="vk" />
-        </label>
-        <label>
-            Номер телефона: <input type="text" placeholder="номер телефона" name="numberPhone" />
-        </label>
+    <form class="form-user-input" name="employee">
+        <input type="hidden" name="id" value="0" />
+        <div class="row">
+            <div class="col-1-1">
+                <label class="name">Имя:</label> <input class="col-2-2" type="text" placeholder="имя" name="name" />
+            </div>
+        </div>
+        <div class="row">
+            <label class="col-1-1">Email: <input class="col-2-2" type="text" placeholder="email" name="email" /> </label>
+        </div>
+        <div class="row">
+            <label class="col-1-1"> Вк: <input class="col-2-2" type="text" placeholder="vk.com" name="vk" /></label>
+        </div>
+        <div class="row">
+            <label class="col-1">
+                Номер телефона: <input class="col-2" type="text" placeholder="номер телефона" name="numberPhone" />
+            </label>
+        </div>
+        <div class="row"><button type="reset" form="employee"> Очистить </button> </div>
     </form>
+</div>
 </body>
 </html>

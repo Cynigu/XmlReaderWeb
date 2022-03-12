@@ -18,5 +18,6 @@
         public bool IsGetSalary { get; set; }
         public bool IsEnd { get; set; }
         public ICollection<FolderDTO>? Folders { get; set; }
+        public EmployeeDTO Employee { get; set; }
     }
 }

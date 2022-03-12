@@ -16,6 +16,7 @@ namespace XmlReader.BLL.Mapper.ToEntity
                 CountFiles = emp.CountFiles,
                 CountObject = emp.CountObject,
                 CountXmlFiles = emp.CountXmlFiles,
+                WorkEmployee = emp.Work.ToDTO()
             };
         }
 
@@ -30,6 +31,7 @@ namespace XmlReader.BLL.Mapper.ToEntity
                 CountFiles = emp.CountFiles,
                 CountObject = emp.CountObject,
                 CountXmlFiles = emp.CountXmlFiles,
+                Work = emp.WorkEmployee.ToEntity()
             };
         }
     }

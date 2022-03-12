@@ -16,6 +16,7 @@ namespace XmlReader.BLL.Mapper.ToModel
                 CountFiles = emp.CountFiles,
                 CountObject = emp.CountObject,
                 CountXmlFiles = emp.CountXmlFiles,
+                WorkEmployee = emp.WorkEmployee.ToModel()
             };
         }
         public static FolderDTO ToDTO(this FolderModel emp)
@@ -29,6 +30,7 @@ namespace XmlReader.BLL.Mapper.ToModel
                 CountFiles = emp.CountFiles,
                 CountObject = emp.CountObject,
                 CountXmlFiles = emp.CountXmlFiles,
+                WorkEmployee = emp.WorkEmployee.ToDTO()
             };
         }
     }

@@ -18,5 +18,6 @@
         public bool IsGetSalary { get; set; }
         public bool IsEnd { get; set; }
         public ICollection<FolderModel>? Folders { get; set; }
+        public EmployeeModel Employee { get; set; }
     }
 }

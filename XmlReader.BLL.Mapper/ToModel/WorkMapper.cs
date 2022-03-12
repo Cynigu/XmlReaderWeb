@@ -22,6 +22,7 @@ namespace XmlReader.BLL.Mapper.ToModel
                 IsGetSalary = work.IsGetSalary,
                 IsEnd = work.IsEnd,
                 Folders = work.Folders?.Select(x => x.ToDTO()).ToList(),
+                Employee = work.Employee.ToDTO()
             };
         }
 
@@ -43,6 +44,7 @@ namespace XmlReader.BLL.Mapper.ToModel
                 IsGetSalary = work.IsGetSalary,
                 IsEnd = work.IsEnd,
                 Folders = work.Folders?.Select(x => x.ToModel()).ToList(),
+                Employee = work.Employee.ToModel()
             };
         }
     }
