@@ -1,5 +1,4 @@
-﻿
-using Models.auth;
+﻿using Models.auth;
 using System;
 
 namespace Models
@@ -13,5 +12,7 @@ namespace Models
         public string? Email { get; set; }
         public string? Vk { get; set; }
         public ICollection<WorkEmployee>? Works { get; set; }
+        public int AuthUserId { get; set; }
+        public AuthUser AuthUser { get; set; }
     }
 }

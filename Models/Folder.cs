@@ -9,6 +9,7 @@ namespace Models
         public ushort CountObject { get; set; } = 0;
         public ushort CountXmlFiles { get; set; } = 0;
         public ushort CountFiles { get; set; }
+        public int WorkId { get; set; }
         public WorkEmployee Work { get; set; }
     }
 }

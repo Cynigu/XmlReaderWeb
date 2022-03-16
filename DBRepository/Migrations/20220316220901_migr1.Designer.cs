@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace XmlReader.Data.DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220223220915_nt")]
-    partial class nt
+    [Migration("20220316220901_migr1")]
+    partial class migr1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -53,8 +53,15 @@ namespace XmlReader.Data.DBRepository.Migrations
                         {
                             Id = 1,
                             Login = "admin",
-                            Password = "qwerty123",
+                            Password = "admin",
                             Role = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Login = "emp",
+                            Password = "emp",
+                            Role = "employee"
                         });
                 });
 
@@ -66,6 +73,12 @@ namespace XmlReader.Data.DBRepository.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int>("AuthUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("bit");
 
@@ -76,9 +89,37 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Property<string>("NumberPhone")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Vk")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("AuthUserId")
+                        .IsUnique();
+
                     b.ToTable("Employees");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AuthUserId = 1,
+                            Email = "i.tiulkina@mail.ru",
+                            IsAdmin = true,
+                            Name = "Ирина Т",
+                            NumberPhone = "79527914962",
+                            Vk = "null"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AuthUserId = 2,
+                            Email = "i.tiulkina@mail.ru",
+                            IsAdmin = false,
+                            Name = "Ирина Т",
+                            NumberPhone = "79527914962",
+                            Vk = "null"
+                        });
                 });
 
             modelBuilder.Entity("Models.Folder", b =>
@@ -161,6 +202,17 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.ToTable("WorkEmployees");
                 });
 
+            modelBuilder.Entity("Models.Employee", b =>
+                {
+                    b.HasOne("Models.auth.AuthUser", "AuthUser")
+                        .WithOne("Employee")
+                        .HasForeignKey("Models.Employee", "AuthUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthUser");
+                });
+
             modelBuilder.Entity("Models.Folder", b =>
                 {
                     b.HasOne("Models.WorkEmployee", "Work")
@@ -181,6 +233,12 @@ namespace XmlReader.Data.DBRepository.Migrations
                         .IsRequired();
 
                     b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("Models.auth.AuthUser", b =>
+                {
+                    b.Navigation("Employee")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.Employee", b =>

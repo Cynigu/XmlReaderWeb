@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace XmlReader.Data.DBRepository.Migrations
 {
-    public partial class nt : Migration
+    public partial class migr1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -32,11 +32,20 @@ namespace XmlReader.Data.DBRepository.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsAdmin = table.Column<bool>(type: "bit", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NumberPhone = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    NumberPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Vk = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AuthUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Employees", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Employees_AuthUsers_AuthUserId",
+                        column: x => x.AuthUserId,
+                        principalTable: "AuthUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -94,7 +103,28 @@ namespace XmlReader.Data.DBRepository.Migrations
             migrationBuilder.InsertData(
                 table: "AuthUsers",
                 columns: new[] { "Id", "Login", "Password", "Role" },
-                values: new object[] { 1, "admin", "qwerty123", "admin" });
+                values: new object[] { 1, "admin", "admin", "admin" });
+
+            migrationBuilder.InsertData(
+                table: "AuthUsers",
+                columns: new[] { "Id", "Login", "Password", "Role" },
+                values: new object[] { 2, "emp", "emp", "employee" });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "AuthUserId", "Email", "IsAdmin", "Name", "NumberPhone", "Vk" },
+                values: new object[] { 1, 1, "i.tiulkina@mail.ru", true, "Ирина Т", "79527914962", "null" });
+
+            migrationBuilder.InsertData(
+                table: "Employees",
+                columns: new[] { "Id", "AuthUserId", "Email", "IsAdmin", "Name", "NumberPhone", "Vk" },
+                values: new object[] { 2, 2, "i.tiulkina@mail.ru", false, "Ирина Т", "79527914962", "null" });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Employees_AuthUserId",
+                table: "Employees",
+                column: "AuthUserId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Folders_WorkId",
@@ -110,9 +140,6 @@ namespace XmlReader.Data.DBRepository.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "AuthUsers");
-
-            migrationBuilder.DropTable(
                 name: "Folders");
 
             migrationBuilder.DropTable(
@@ -120,6 +147,9 @@ namespace XmlReader.Data.DBRepository.Migrations
 
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "AuthUsers");
         }
     }
 }
