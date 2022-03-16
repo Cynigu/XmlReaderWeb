@@ -1,14 +1,10 @@
-﻿using DBRepository.Interfaces;
+﻿using DBRepository;
 using Models.auth;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using XmlReader.Data.DBRepository.Interfaces;
 
-namespace DBRepository.Repositories
+namespace XmlReader.Data.DBRepository.Repositories.auth
 {
-    public class AuthUserRepository : TEntityRepository<AuthUser, RepositoryContext>, IAuthUserRepository
+    public class AuthUserRepository : DataBaseRepository<AuthUser, RepositoryContext>, IAuthUserRepository
     {
         public AuthUserRepository(RepositoryContext context) : base(context)
         {

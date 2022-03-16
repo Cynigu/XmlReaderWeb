@@ -1,9 +1,10 @@
-﻿using DBRepository.Interfaces;
+﻿using DBRepository;
 using Models;
+using XmlReader.Data.DBRepository.Interfaces;
 
-namespace DBRepository.Repositories
+namespace XmlReader.Data.DBRepository.Repositories
 {
-    public class EmployeeRepository : TEntityRepository<Employee, RepositoryContext>, IEmployeeRepository
+    public class EmployeeRepository : DataBaseRepository<Employee, RepositoryContext>, IEmployeeRepository
     {
         public EmployeeRepository(RepositoryContext context) : base(context)
         {

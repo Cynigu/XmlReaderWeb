@@ -1,7 +1,6 @@
-﻿
-using Models;
+﻿using Models;
 
-namespace DBRepository.Interfaces
+namespace XmlReader.Data.DBRepository.Interfaces
 {
     public interface IFolderRepository : IRepository<Folder>
     {

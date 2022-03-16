@@ -1,12 +1,9 @@
-﻿using DBRepository.Interfaces;
-using DBRepository.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DBRepository;
+using XmlReader.Data.DBRepository.Interfaces;
+using XmlReader.Data.DBRepository.Repositories;
+using XmlReader.Data.DBRepository.Repositories.auth;
 
-namespace DBRepository.UOW
+namespace XmlReader.Data.DBRepository.UOW
 {
     public class UnitOfWork : IUnitOfWork, IDisposable
     {

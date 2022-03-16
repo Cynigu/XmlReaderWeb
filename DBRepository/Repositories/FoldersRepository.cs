@@ -1,10 +1,10 @@
-﻿using DBRepository.Interfaces;
-using Microsoft.EntityFrameworkCore;
+﻿using DBRepository;
 using Models;
+using XmlReader.Data.DBRepository.Interfaces;
 
-namespace DBRepository.Repositories
+namespace XmlReader.Data.DBRepository.Repositories
 {
-    public class FoldersRepository : TEntityRepository<Folder, RepositoryContext>, IFolderRepository
+    public class FoldersRepository : DataBaseRepository<Folder, RepositoryContext>, IFolderRepository
     {
         public FoldersRepository(RepositoryContext context) : base(context)
         {

@@ -1,15 +1,11 @@
 ﻿using DBRepository.Factories;
-using DBRepository.UOW;
 using Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using XmlReader.BLL.DTO;
 using XmlReader.BLL.Mapper.ToEntity;
+using XmlReader.BLL.Services.FolderServices;
+using XmlReader.Data.DBRepository.UOW;
 
-namespace XmlReader.BLL.Services.FolderServices
+namespace XmlReader.BLL.Service.Services
 {
     public class FolderBaseService : IFolderBaseService
     {

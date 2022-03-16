@@ -1,17 +1,13 @@
-﻿using Models;
-
-namespace DBRepository.Interfaces
+﻿namespace XmlReader.Data.DBRepository.Interfaces
 {
     public interface IRepository<T> 
-        where T : class, IEntity
+        where T : class
     {
-        IEnumerable<T> Get(); // получение всех объектов
-        Task<T> Get(int id); // получение одного объекта по id
-        Task<IEnumerable<T>> Get(int[] ids); // получение одного объекта по id
-        IEnumerable<T> Find(Func<T, bool> predicate); // получение одного объекта по id
-        Task Add(T item); // добавление объекта
-        Task Update(T item); // обновление объекта
-        Task<T> Delete(int id); // удаление объекта по id
+        Task AddAsync(T item); // добавление объекта
+        Task AddRangeAsync(ICollection<T> item); // добавление объекта
+        Task UpdateAsync(T item); // обновление объекта
         Task SaveAsync();  // сохранение изменений
+        Task<IEnumerable<T>> RemoveRangeAsync(Func<T, bool> predicate); // удаление объекта по id
+        IQueryable<T> GetEntityQuery();
     }
 }

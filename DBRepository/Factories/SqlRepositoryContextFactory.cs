@@ -1,7 +1,8 @@
-﻿using DBRepository.Interfaces;
+﻿using DBRepository;
+using DBRepository.Factories;
 using Microsoft.EntityFrameworkCore;
 
-namespace DBRepository.Factories
+namespace XmlReader.Data.DBRepository.Factories
 {
     public class SqlRepositoryContextFactory : IRepositoryContextFactory
     {

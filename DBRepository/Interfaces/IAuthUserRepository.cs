@@ -1,6 +1,6 @@
 ﻿using Models.auth;
 
-namespace DBRepository.Interfaces
+namespace XmlReader.Data.DBRepository.Interfaces
 {
     public interface IAuthUserRepository : IRepository<AuthUser>
     {

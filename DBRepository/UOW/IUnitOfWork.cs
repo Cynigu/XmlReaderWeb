@@ -1,11 +1,6 @@
-﻿using DBRepository.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using XmlReader.Data.DBRepository.Interfaces;
 
-namespace DBRepository.UOW
+namespace XmlReader.Data.DBRepository.UOW
 {
     public interface IUnitOfWork
     {

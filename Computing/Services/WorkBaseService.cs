@@ -1,11 +1,11 @@
 ﻿using DBRepository.Factories;
-using DBRepository.UOW;
 using Models;
 using XmlReader.BLL.DTO;
 using XmlReader.BLL.Interfaces;
 using XmlReader.BLL.Mapper.ToEntity;
+using XmlReader.Data.DBRepository.UOW;
 
-namespace XmlReader.BLL.Services
+namespace XmlReader.BLL.Service.Services
 {
     public class WorkBaseService: IWorkBaseService
     {
