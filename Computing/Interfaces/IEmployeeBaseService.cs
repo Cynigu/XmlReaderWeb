@@ -1,6 +1,6 @@
 ﻿using XmlReader.BLL.DTO;
 
-namespace XmlReader.BLL.Interfaces
+namespace XmlReader.BLL.Service.Interfaces
 {
     public interface IEmployeeBaseService: IBaseService<EmployeeDTO>
     {

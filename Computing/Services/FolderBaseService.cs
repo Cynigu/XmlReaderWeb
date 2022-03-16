@@ -19,7 +19,7 @@ namespace XmlReader.BLL.Service.Services
         {
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                await uow.FolderRepository.Add(item.ToEntity());
+                await uow.FolderRepository.AddRangeAsync(new List<Folder>(){ item.ToEntity()});
             }
         }
 
@@ -28,7 +28,7 @@ namespace XmlReader.BLL.Service.Services
             Folder emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                emp = await uow.FolderRepository.Delete(id);
+                emp = (await uow.FolderRepository.RemoveRangeAsync(x => x.Id == id)).First();
             }
             return emp.ToDTO();
 
@@ -39,27 +39,29 @@ namespace XmlReader.BLL.Service.Services
             IEnumerable<Folder> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                emp = uow.FolderRepository.Get().ToList();
+                emp = uow.FolderRepository.GetEntityQuery().ToList();
             }
             return emp.Select(x => x.ToDTO());
         }
 
         public async Task<FolderDTO> Get(int id)
         {
-            Folder emp;
+            Folder? emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                emp = await uow.FolderRepository.Get(id);
+                IQueryable<Folder?> emps = uow.FolderRepository.GetEntityQuery();
+                emp = emps.FirstOrDefault(x => x != null && x.Id == id);
             }
             return emp.ToDTO();
         }
 
         public async Task<IEnumerable<FolderDTO>> Get(int[] ids)
         {
-            IEnumerable<Folder> emp;
+            IQueryable<Folder?> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                emp = await uow.FolderRepository.Get(ids);
+                IQueryable<Folder?> emps = uow.FolderRepository.GetEntityQuery();
+                emp = emps.Where(x => x != null && ids.Contains(x.Id));
             }
             return emp.Select(x => x.ToDTO());
         }
@@ -76,7 +78,7 @@ namespace XmlReader.BLL.Service.Services
         {
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                await uow.FolderRepository.Update(item.ToEntity());
+                await uow.FolderRepository.UpdateAsync(item.ToEntity());
             }
         }
     }

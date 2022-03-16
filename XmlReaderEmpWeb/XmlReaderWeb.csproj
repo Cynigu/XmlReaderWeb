@@ -7,10 +7,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\**" />
     <Compile Remove="Views\Employee\**" />
+    <Compile Remove="wwwroot\webfonts\**" />
+    <Content Remove="Pages\**" />
     <Content Remove="Views\Employee\**" />
+    <Content Remove="wwwroot\webfonts\**" />
+    <EmbeddedResource Remove="Pages\**" />
     <EmbeddedResource Remove="Views\Employee\**" />
+    <EmbeddedResource Remove="wwwroot\webfonts\**" />
+    <None Remove="Pages\**" />
     <None Remove="Views\Employee\**" />
+    <None Remove="wwwroot\webfonts\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,17 +50,10 @@
   <ItemGroup>
     <Folder Include="Views\EmployeeBase\" />
     <Folder Include="Views\Shared\" />
-    <Folder Include="Pages\" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="wwwroot\ListWork.html" />
-    <None Include="wwwroot\webfonts\fa-brands-400.svg" />
-    <None Include="wwwroot\webfonts\fa-brands-400.woff2" />
-    <None Include="wwwroot\webfonts\fa-regular-400.svg" />
-    <None Include="wwwroot\webfonts\fa-regular-400.woff2" />
-    <None Include="wwwroot\webfonts\fa-solid-900.svg" />
-    <None Include="wwwroot\webfonts\fa-solid-900.woff2" />
   </ItemGroup>
 
 </Project>

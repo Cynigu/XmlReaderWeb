@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using XmlReader.BLL.DTO;
-
-namespace XmlReader.BLL.Interfaces
+﻿namespace XmlReader.BLL.Service.Interfaces
 {
     public interface IBaseService<T>
-        where T : class, IEntityDTO
+        where T : class
     {
         IEnumerable<T> Get(); // получение всех объектов
         Task<T> Get(int id); // получение одного объекта по id

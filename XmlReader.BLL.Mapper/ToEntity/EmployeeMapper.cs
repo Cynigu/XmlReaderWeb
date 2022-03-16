@@ -5,7 +5,7 @@ namespace XmlReader.BLL.Mapper.ToEntity
 {
     public static class EmployeeMapper
     {
-        public static EmployeeDTO ToDTO(this Employee emp)
+        public static EmployeeDTO ToDTO(this Employee? emp)
         {
             if (emp == null)
                 return null;
