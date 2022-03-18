@@ -25,6 +25,22 @@ namespace XmlReader.Data.DBRepository.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Projects",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projects", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "UserProfiles",
                 columns: table => new
                 {
@@ -44,50 +60,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                         column: x => x.AuthUserId,
                         principalTable: "AuthUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Workspaces",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false),
-                    UserProfileId = table.Column<int>(type: "int", nullable: false),
-                    ProjectRole = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Workspaces", x => new { x.Id, x.UserProfileId });
-                    table.ForeignKey(
-                        name: "FK_Workspaces_UserProfiles_UserProfileId",
-                        column: x => x.UserProfileId,
-                        principalTable: "UserProfiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Projects",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DateStart = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DateEnd = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
-                    WorkspaceId = table.Column<int>(type: "int", nullable: false),
-                    WorkspaceEntityId = table.Column<int>(type: "int", nullable: false),
-                    WorkspaceEntityUserProfileId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Projects_Workspaces_WorkspaceEntityId_WorkspaceEntityUserProfileId",
-                        columns: x => new { x.WorkspaceEntityId, x.WorkspaceEntityUserProfileId },
-                        principalTable: "Workspaces",
-                        principalColumns: new[] { "Id", "UserProfileId" },
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -125,6 +97,32 @@ namespace XmlReader.Data.DBRepository.Migrations
                         principalColumn: "Id");
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Workspaces",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false),
+                    UserProfileId = table.Column<int>(type: "int", nullable: false),
+                    ProjectId = table.Column<int>(type: "int", nullable: false),
+                    ProjectRole = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workspaces", x => new { x.Id, x.UserProfileId, x.ProjectId });
+                    table.ForeignKey(
+                        name: "FK_Workspaces_Projects_ProjectId",
+                        column: x => x.ProjectId,
+                        principalTable: "Projects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Workspaces_UserProfiles_UserProfileId",
+                        column: x => x.UserProfileId,
+                        principalTable: "UserProfiles",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.InsertData(
                 table: "AuthUsers",
                 columns: new[] { "Id", "Login", "Password", "Role" },
@@ -156,14 +154,15 @@ namespace XmlReader.Data.DBRepository.Migrations
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_WorkspaceEntityId_WorkspaceEntityUserProfileId",
-                table: "Projects",
-                columns: new[] { "WorkspaceEntityId", "WorkspaceEntityUserProfileId" });
-
-            migrationBuilder.CreateIndex(
                 name: "IX_UserProfiles_AuthUserId",
                 table: "UserProfiles",
                 column: "AuthUserId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Workspaces_ProjectId",
+                table: "Workspaces",
+                column: "ProjectId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -178,10 +177,10 @@ namespace XmlReader.Data.DBRepository.Migrations
                 name: "Folders");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "Workspaces");
 
             migrationBuilder.DropTable(
-                name: "Workspaces");
+                name: "Projects");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");

@@ -4,6 +4,7 @@ using DBRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace XmlReader.Data.DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220318220347_migr1")]
+    partial class migr1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -89,6 +91,10 @@ namespace XmlReader.Data.DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("PathFolder")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
@@ -108,32 +114,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("Folders");
-                });
-
-            modelBuilder.Entity("Models.Image", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("FolderId")
-                        .HasColumnType("int");
-
-                    b.Property<byte[]>("ImageByte")
-                        .IsRequired()
-                        .HasColumnType("image");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FolderId");
-
-                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Models.ProjectEntity", b =>
@@ -255,17 +235,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Navigation("UserProfile");
                 });
 
-            modelBuilder.Entity("Models.Image", b =>
-                {
-                    b.HasOne("Models.FolderEntity", "Folder")
-                        .WithMany("Image")
-                        .HasForeignKey("FolderId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Folder");
-                });
-
             modelBuilder.Entity("Models.UserProfileEntity", b =>
                 {
                     b.HasOne("Models.auth.AuthUserEntity", "AuthUser")
@@ -300,11 +269,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                 {
                     b.Navigation("UserProfile")
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Models.FolderEntity", b =>
-                {
-                    b.Navigation("Image");
                 });
 
             modelBuilder.Entity("Models.ProjectEntity", b =>

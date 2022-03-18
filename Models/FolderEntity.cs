@@ -9,7 +9,6 @@
     {
         public int Id { get; set; }
         public string Description { get; set; }
-        public string PathFolder { get; set; }
         public DateTime DateStart { get; set; } // Дата начала 
         public DateTime DateEnd { get; set; } // Дата окончания
         public ushort CountFactObject { get; set; } = 0;
@@ -20,5 +19,6 @@
         public FolderStatus Status { get; set; } = FolderStatus.Process;
         public int? UserProfileId { get; set; }
         public UserProfileEntity? UserProfile { get; set; }
+        public ICollection<Image>? Image { get; set; }
     }
 }

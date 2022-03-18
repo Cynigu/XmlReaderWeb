@@ -19,6 +19,7 @@ namespace XmlReader.Data.DBRepository.UOW
             FolderRepository = new FoldersRepository(context);
             AuthUserRepository = new AuthUserRepository(context);
             WorkspaceRepository = new WorkspaceRepository(context);
+            ImageRepository = new ImageRepository(context);
         }
 
         public IUserProfileRepository UserProfileRepository { get; }
@@ -29,6 +30,7 @@ namespace XmlReader.Data.DBRepository.UOW
 
         public IAuthUserRepository AuthUserRepository { get; }
         public IWorkspaceRepository WorkspaceRepository { get; }
+        public IImageRepository ImageRepository { get; }
 
         private bool disposed = false;
         public void Save()

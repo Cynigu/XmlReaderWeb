@@ -68,7 +68,6 @@ namespace Models
         public DateTime DateEnd { get; set; } // Дата окончания
         public StatusProject Status { get; set; } = StatusProject.Process;
         public ICollection<FolderEntity>? Folders { get; set; }
-        public int WorkspaceId { get; set; }
-        public WorkspaceEntity WorkspaceEntity { get; set; } = null!;
+        public WorkspaceEntity Workspace { get; set; } = null!;
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace XmlReader.Data.DBRepository.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20220318201329_migr1")]
-    partial class migr1
+    [Migration("20220318221954_migr2")]
+    partial class migr2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -91,10 +91,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("PathFolder")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("ProjectId")
                         .HasColumnType("int");
 
@@ -114,6 +110,33 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.HasIndex("UserProfileId");
 
                     b.ToTable("Folders");
+                });
+
+            modelBuilder.Entity("Models.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("FolderId")
+                        .HasColumnType("int");
+
+                    b.Property<byte[]>("ImageByte")
+                        .IsRequired()
+                        .HasColumnType("image");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FolderId")
+                        .IsUnique();
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Models.ProjectEntity", b =>
@@ -137,18 +160,7 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<int>("WorkspaceEntityId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkspaceEntityUserProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("WorkspaceId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("WorkspaceEntityId", "WorkspaceEntityUserProfileId");
 
                     b.ToTable("Projects");
                 });
@@ -213,10 +225,16 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Property<int>("UserProfileId")
                         .HasColumnType("int");
 
+                    b.Property<int>("ProjectId")
+                        .HasColumnType("int");
+
                     b.Property<int>("ProjectRole")
                         .HasColumnType("int");
 
-                    b.HasKey("Id", "UserProfileId");
+                    b.HasKey("Id", "UserProfileId", "ProjectId");
+
+                    b.HasIndex("ProjectId")
+                        .IsUnique();
 
                     b.HasIndex("UserProfileId");
 
@@ -240,15 +258,15 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Navigation("UserProfile");
                 });
 
-            modelBuilder.Entity("Models.ProjectEntity", b =>
+            modelBuilder.Entity("Models.Image", b =>
                 {
-                    b.HasOne("Models.WorkspaceEntity", "WorkspaceEntity")
-                        .WithMany("Project")
-                        .HasForeignKey("WorkspaceEntityId", "WorkspaceEntityUserProfileId")
+                    b.HasOne("Models.FolderEntity", "Folder")
+                        .WithOne("Image")
+                        .HasForeignKey("Models.Image", "FolderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("WorkspaceEntity");
+                    b.Navigation("Folder");
                 });
 
             modelBuilder.Entity("Models.UserProfileEntity", b =>
@@ -264,11 +282,19 @@ namespace XmlReader.Data.DBRepository.Migrations
 
             modelBuilder.Entity("Models.WorkspaceEntity", b =>
                 {
+                    b.HasOne("Models.ProjectEntity", "Project")
+                        .WithOne("Workspace")
+                        .HasForeignKey("Models.WorkspaceEntity", "ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Models.UserProfileEntity", "UserProfile")
                         .WithMany("Workspaces")
                         .HasForeignKey("UserProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Project");
 
                     b.Navigation("UserProfile");
                 });
@@ -279,9 +305,18 @@ namespace XmlReader.Data.DBRepository.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Models.FolderEntity", b =>
+                {
+                    b.Navigation("Image")
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Models.ProjectEntity", b =>
                 {
                     b.Navigation("Folders");
+
+                    b.Navigation("Workspace")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Models.UserProfileEntity", b =>
@@ -289,11 +324,6 @@ namespace XmlReader.Data.DBRepository.Migrations
                     b.Navigation("Folders");
 
                     b.Navigation("Workspaces");
-                });
-
-            modelBuilder.Entity("Models.WorkspaceEntity", b =>
-                {
-                    b.Navigation("Project");
                 });
 #pragma warning restore 612, 618
         }
