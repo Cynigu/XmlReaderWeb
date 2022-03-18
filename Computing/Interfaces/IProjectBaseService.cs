@@ -3,7 +3,7 @@ using XmlReader.BLL.Service.Interfaces;
 
 namespace XmlReader.BLL.Interfaces
 {
-    public interface IWorkBaseService : IBaseService<WorkEmployeeDTO>
+    public interface IProjectBaseService : IBaseService<ProjectDTO>
     {
 
     }

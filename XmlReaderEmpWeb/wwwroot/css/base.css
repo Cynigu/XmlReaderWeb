@@ -1,0 +1,66 @@
+*{
+    box-sizing: border-box; 
+}
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    margin: 0;
+}
+body > header{
+    flex: 1;
+    font-size: auto;
+    text-align: center;
+    block-size: auto;
+
+}
+body > main{
+    display: flex;
+    flex:0;
+    min-height: calc(100vh - 40vh);
+    block-size: auto;
+}
+main > article{
+    flex: 1;
+    block-size: auto;
+}
+main > nav{
+    flex: -1;
+    background-color: #7ED5A9;
+    block-size: auto;
+}
+header, footer, article, nav, aside {
+    padding: 1em;
+}
+body > footer{
+    flex:-1;
+    block-size: auto;
+}
+header, footer {
+height: 20vh;
+background-color: #4EAC7C;
+}
+
+@media screen and (max-width: 575px) {
+    main {
+      display: block;
+    }
+}
+
+.auth-form{
+    padding: 0;
+    border-radius: 3px;
+}
+.auth-form > .auth-form__row{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.auth-form__header{
+    font: sans-serif;
+    font-size: large;
+}
+
+table {
+    margin: auto; /* Выравниваем таблицу по центру */
+}

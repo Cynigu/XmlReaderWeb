@@ -4,7 +4,6 @@ using XmlReader.BLL.Interfaces;
 using XmlReader.BLL.Services;
 using DBRepository.Factories;
 using XmlReader.BLL.Service.Interfaces;
-using XmlReader.BLL.Service.Services;
 using XmlReader.BLL.Services.FolderServices;
 using XmlReader.Data.DBRepository.Factories;
 
@@ -20,17 +19,17 @@ builder.Services.AddControllers();
 
 builder.Services.AddDbContext<RepositoryContext>(options => options.UseSqlServer(connectionString));
 builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryContextFactory(connectionString));
-builder.Services.AddScoped<IEmployeeBaseService, EmployeeBaseService>();
-builder.Services.AddScoped<IFolderBaseService, FolderBaseService>();
-builder.Services.AddScoped<IWorkBaseService, WorkBaseService>();
+//builder.Services.AddScoped<IEmployeeBaseService, EmployeeBaseService>();
+//builder.Services.AddScoped<IFolderBaseService, FolderBaseService>();
+//builder.Services.AddScoped<IWorkBaseService, WorkBaseService>();
 
 
 builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
-builder.Services.AddMvc()
-            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.EmployeeControllers.EmployeeBaseController).Assembly)
-            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.FolderControllers.FolderBaseController).Assembly)
-            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.WorkControllers.WorkBaseController).Assembly)
-            .AddControllersAsServices();
+//builder.Services.AddMvc()
+//            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.EmployeeControllers.EmployeeBaseController).Assembly)
+//            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.FolderControllers.FolderBaseController).Assembly)
+//            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.WorkControllers.WorkBaseController).Assembly)
+//            .AddControllersAsServices();
 
 var app = builder.Build();
 

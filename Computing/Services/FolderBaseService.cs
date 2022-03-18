@@ -19,13 +19,13 @@ namespace XmlReader.BLL.Service.Services
         {
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                await uow.FolderRepository.AddRangeAsync(new List<Folder>(){ item.ToEntity()});
+                await uow.FolderRepository.AddRangeAsync(new List<FolderEntity>(){ item.ToEntity()});
             }
         }
 
         public async Task<FolderDTO> Delete(int id)
         {
-            Folder emp;
+            FolderEntity emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = (await uow.FolderRepository.RemoveRangeAsync(x => x.Id == id)).First();
@@ -36,7 +36,7 @@ namespace XmlReader.BLL.Service.Services
 
         public IEnumerable<FolderDTO> Get()
         {
-            IEnumerable<Folder> emp;
+            IEnumerable<FolderEntity> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = uow.FolderRepository.GetEntityQuery().ToList();
@@ -46,10 +46,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<FolderDTO> Get(int id)
         {
-            Folder? emp;
+            FolderEntity? emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<Folder?> emps = uow.FolderRepository.GetEntityQuery();
+                IQueryable<FolderEntity?> emps = uow.FolderRepository.GetEntityQuery();
                 emp = emps.FirstOrDefault(x => x != null && x.Id == id);
             }
             return emp.ToDTO();
@@ -57,10 +57,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<IEnumerable<FolderDTO>> Get(int[] ids)
         {
-            IQueryable<Folder?> emp;
+            IQueryable<FolderEntity?> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<Folder?> emps = uow.FolderRepository.GetEntityQuery();
+                IQueryable<FolderEntity?> emps = uow.FolderRepository.GetEntityQuery();
                 emp = emps.Where(x => x != null && ids.Contains(x.Id));
             }
             return emp.Select(x => x.ToDTO());

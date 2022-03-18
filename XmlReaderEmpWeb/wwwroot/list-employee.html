@@ -4,32 +4,24 @@
     <meta name="viewport">
     <meta charset="utf-8" lang="ru" />
     <link rel="stylesheet" href="css/base.css" type="text/css" />
-    <title>Список пользователей</title>
+    <title>Список работников</title>
 </head>
 <body>
-    
-<img src="images\—Pngtree—abstract circle technology background_3527873.png" alt="Моё тестовое изображение" width="200" height="200">
 <div class="form">
-    <h2>Список пользователей</h2>
-    <form class="form-user-input" name="employee">
+    <h2>Список работников</h2>
+    <form class="form-user-add" name="employee">
         <input type="hidden" name="id" value="0" />
-        <div class="row">
-            <div class="col-1-1">
-                <label class="name">Имя:</label> <input class="col-2-2" type="text" placeholder="имя" name="name" />
-            </div>
+        <div class="form-user-add-login">
+            <label>Логин</label>
+            <input name="login" type="text"/>
         </div>
-        <div class="row">
-            <label class="col-1-1">Email: <input class="col-2-2" type="text" placeholder="email" name="email" /> </label>
+        <div>
+            <button name="form-user-add-button">Добавить</button>
         </div>
-        <div class="row">
-            <label class="col-1-1"> Вк: <input class="col-2-2" type="text" placeholder="vk.com" name="vk" /></label>
-        </div>
-        <div class="row">
-            <label class="col-1">
-                Номер телефона: <input class="col-2" type="text" placeholder="номер телефона" name="numberPhone" />
-            </label>
-        </div>
-        <div class="row"><button type="reset" form="employee"> Очистить </button> </div>
+    </form>
+    <form class="form-table-employees">
+        <table>
+        </table>
     </form>
 </div>
 </body>

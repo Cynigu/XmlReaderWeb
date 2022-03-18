@@ -2,7 +2,7 @@
 
 namespace XmlReader.Data.DBRepository.Interfaces
 {
-    public interface IFolderRepository : IRepository<Folder>
+    public interface IFolderRepository : IRepository<FolderEntity>
     {
     }
 }

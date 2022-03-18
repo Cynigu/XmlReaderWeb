@@ -2,7 +2,7 @@
 
 namespace XmlReader.Data.DBRepository.Interfaces
 {
-    public interface IWorkRepository : IRepository<WorkEmployee>
+    public interface IUserProfileRepository : IRepository<UserProfileEntity>
     {
     }
 }

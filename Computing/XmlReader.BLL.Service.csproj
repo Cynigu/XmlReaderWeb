@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Services\EmployeeBaseService.cs" />
+    <Compile Remove="Services\FolderBaseService.cs" />
+    <Compile Remove="Services\WorkBaseService.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper" Version="11.0.1" />
   </ItemGroup>
 
@@ -14,6 +20,10 @@
     <ProjectReference Include="..\DBRepository\XmlReader.Data.DBRepository.csproj" />
     <ProjectReference Include="..\XmlReader.BLL.DTO\XmlReader.BLL.DTO.csproj" />
     <ProjectReference Include="..\XmlReader.BLL.Mapper\XmlReader.BLL.Mapper.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>

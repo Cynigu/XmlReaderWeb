@@ -1,7 +1,6 @@
 ﻿using DBRepository;
 using XmlReader.Data.DBRepository.Interfaces;
 using XmlReader.Data.DBRepository.Repositories;
-using XmlReader.Data.DBRepository.Repositories.auth;
 
 namespace XmlReader.Data.DBRepository.UOW
 {
@@ -15,19 +14,21 @@ namespace XmlReader.Data.DBRepository.UOW
                 throw new ArgumentNullException("context");
             }
             _repositoryContext = context;
-            EmployeeRepository = new EmployeeRepository(context);
-            WorkRepository = new WorkRepository(context);
+            UserProfileRepository = new UserProfileRepository(context);
+            ProjectRepository = new ProjectRepository(context);
             FolderRepository = new FoldersRepository(context);
             AuthUserRepository = new AuthUserRepository(context);
+            WorkspaceRepository = new WorkspaceRepository(context);
         }
 
-        public IEmployeeRepository EmployeeRepository { get; }
+        public IUserProfileRepository UserProfileRepository { get; }
 
-        public IWorkRepository WorkRepository { get; }
+        public IProjectRepository ProjectRepository { get; }
 
         public IFolderRepository FolderRepository { get; }
 
         public IAuthUserRepository AuthUserRepository { get; }
+        public IWorkspaceRepository WorkspaceRepository { get; }
 
         private bool disposed = false;
         public void Save()

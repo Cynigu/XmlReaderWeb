@@ -20,13 +20,13 @@ namespace XmlReader.BLL.Service.Services
         {
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                await uow.EmployeeRepository.AddRangeAsync(new List<Employee>(){item.ToEntity()});
+                await uow.EmployeeRepository.AddRangeAsync(new List<UserProfileEntity>(){item.ToEntity()});
             }
         }
 
         public async Task<EmployeeDTO> Delete(int id)
         {
-            Employee emp;
+            UserProfileEntity emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = (await uow.EmployeeRepository.RemoveRangeAsync(x=> x.Id == id)).First();
@@ -37,7 +37,7 @@ namespace XmlReader.BLL.Service.Services
 
         public IEnumerable<EmployeeDTO> Get()
         {
-            IEnumerable<Employee> emp;
+            IEnumerable<UserProfileEntity> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = uow.EmployeeRepository.GetEntityQuery().ToList();
@@ -47,10 +47,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<EmployeeDTO> Get(int id)
         {
-            Employee? emp;
+            UserProfileEntity? emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<Employee?> emps = uow.EmployeeRepository.GetEntityQuery();
+                IQueryable<UserProfileEntity?> emps = uow.EmployeeRepository.GetEntityQuery();
                 emp = emps.FirstOrDefault(x => x != null && x.Id == id);
             }
             return emp.ToDTO();
@@ -58,10 +58,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<IEnumerable<EmployeeDTO>> Get(int[] ids)
         {
-            IQueryable<Employee?> emp;
+            IQueryable<UserProfileEntity?> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<Employee?> emps = uow.EmployeeRepository.GetEntityQuery();
+                IQueryable<UserProfileEntity?> emps = uow.EmployeeRepository.GetEntityQuery();
                 emp = emps.Where(x => x!=null && ids.Contains(x.Id));
             }
             return emp.Select(x => x.ToDTO());

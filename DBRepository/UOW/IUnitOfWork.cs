@@ -4,8 +4,8 @@ namespace XmlReader.Data.DBRepository.UOW
 {
     public interface IUnitOfWork
     {
-        IEmployeeRepository EmployeeRepository { get; }
-        IWorkRepository WorkRepository { get; }
+        IUserProfileRepository UserProfileRepository { get; }
+        IProjectRepository ProjectRepository { get; }
         IFolderRepository FolderRepository { get; }
         IAuthUserRepository AuthUserRepository { get; }
     }

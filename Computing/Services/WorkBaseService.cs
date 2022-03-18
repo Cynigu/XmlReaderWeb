@@ -19,13 +19,13 @@ namespace XmlReader.BLL.Service.Services
         {
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                await uow.WorkRepository.AddRangeAsync(new List<WorkEmployee>(){ item.ToEntity()});
+                await uow.WorkRepository.AddRangeAsync(new List<ProjectEntity>(){ item.ToEntity()});
             }
         }
 
         public async Task<WorkEmployeeDTO> Delete(int id)
         {
-            WorkEmployee emp;
+            ProjectEntity emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = (await uow.WorkRepository.RemoveRangeAsync(x => x.Id == id)).First();
@@ -36,7 +36,7 @@ namespace XmlReader.BLL.Service.Services
 
         public IEnumerable<WorkEmployeeDTO> Get()
         {
-            IEnumerable<WorkEmployee> emp;
+            IEnumerable<ProjectEntity> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
                 emp = uow.WorkRepository.GetEntityQuery().ToList();
@@ -46,10 +46,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<WorkEmployeeDTO> Get(int id)
         {
-            WorkEmployee? emp;
+            ProjectEntity? emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<WorkEmployee?> emps = uow.WorkRepository.GetEntityQuery();
+                IQueryable<ProjectEntity?> emps = uow.WorkRepository.GetEntityQuery();
                 emp = emps.FirstOrDefault(x => x != null && x.Id == id);
             }
             return emp.ToDTO();
@@ -57,10 +57,10 @@ namespace XmlReader.BLL.Service.Services
 
         public async Task<IEnumerable<WorkEmployeeDTO>> Get(int[] ids)
         {
-            IQueryable<WorkEmployee?> emp;
+            IQueryable<ProjectEntity?> emp;
             using (var uow = new UnitOfWork(_contextFactory.Create()))
             {
-                IQueryable<WorkEmployee?> emps = uow.WorkRepository.GetEntityQuery();
+                IQueryable<ProjectEntity?> emps = uow.WorkRepository.GetEntityQuery();
                 emp = emps.Where(x => x != null && ids.Contains(x.Id));
             }
             return emp.Select(x => x.ToDTO());

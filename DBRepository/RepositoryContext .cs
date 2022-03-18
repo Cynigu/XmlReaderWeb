@@ -11,37 +11,39 @@ namespace DBRepository
 
         }
 
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<Folder> Folders { get; set; }
-        public DbSet<WorkEmployee> WorkEmployees { get; set; }
-        public DbSet<AuthUser> AuthUsers { get; set; }
+        public DbSet<UserProfileEntity> UserProfiles { get; set; }
+        public DbSet<FolderEntity> Folders { get; set; }
+        public DbSet<ProjectEntity> Projects { get; set; }
+        public DbSet<AuthUserEntity> AuthUsers { get; set; }
+        public DbSet<WorkspaceEntity> Workspaces { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            Employee admin = new Employee()
+            UserProfileEntity admin = new UserProfileEntity()
             {
                 Id = 1,
                 AuthUserId = 1,
-                IsAdmin = true,
                 Email = "i.tiulkina@mail.ru",
                 Name = "Ирина Т",
                 NumberPhone = "79527914962",
-                Vk = "null"
+                Vk = "null",
             };
 
-            Employee emp = new Employee()
+            UserProfileEntity emp = new UserProfileEntity()
             {
                 Id = 2,
                 AuthUserId = 2,
-                IsAdmin = false,
                 Email = "i.tiulkina@mail.ru",
                 Name = "Ирина Т",
                 NumberPhone = "79527914962",
                 Vk = "null"
             };
-            modelBuilder.Entity<AuthUser>().HasData(new AuthUser { Id = 1, Login="admin", Password="admin", Role="admin"});
-            modelBuilder.Entity<AuthUser>().HasData(new AuthUser { Id = 2, Login = "emp", Password = "emp", Role = "employee" });
-            modelBuilder.Entity<Employee>().HasData(admin, emp);
+            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 1, Login="admin", Password="admin", Role = UserRole.Admin});
+            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 2, Login = "user", Password = "user", Role = UserRole.User });
+            modelBuilder.Entity<UserProfileEntity>().HasData(admin, emp);
+
+            modelBuilder.Entity<WorkspaceEntity>()
+                .HasKey(t => new { t.Id, t.UserProfileId });
             base.OnModelCreating(modelBuilder);
         }
     }

@@ -9,7 +9,11 @@
   <ItemGroup>
     <ProjectReference Include="..\Models\XmlReader.Data.Models.csproj" />
     <ProjectReference Include="..\XmlReader.BLL.DTO\XmlReader.BLL.DTO.csproj" />
-    <ProjectReference Include="..\XmlReader.WEB.Models\XmlReader.WEB.Models.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ToEntity\" />
+    <Folder Include="ToModel\" />
   </ItemGroup>
 
 </Project>
