@@ -1,0 +1,24 @@
+@import url(color-base.css);
+
+input[type=text], input[type=password], input[type=datetime] {
+    width: 100%;
+    padding: 5px 10px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+.edit-element-area{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.edit-buttons{
+    margin: 5px 2px 2px 5px;
+    flex:1;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+

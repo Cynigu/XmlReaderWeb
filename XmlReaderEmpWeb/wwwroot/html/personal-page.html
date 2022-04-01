@@ -1,60 +1,69 @@
+
 <!DOCTYPE html>
 
-<html>
+<html lang="ru">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <link rel="stylesheet" href="css/base.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/base.css" type="text/css" />
+    <link rel="stylesheet" href="../css/edit.css" type="text/css" />
     <title>Автоматизированная система оценки трудозатрат ручной разметки фотографий</title>
 </head>
 <body>
-    <div class="top-box">
-        <header>
-            <h1>MarkupMonitoring</h1>
-        </header>
-        <nav>
-            <a href="home.html">Домашняя страница</a>
-            <a href="personal-page.html">Личный кабинет</a>
-            <a href="workspace.html">Рабочее пространство</a>
-            <a href="../index.html">Выйти</a>
-        </nav>
-    </div>
-    
-    <main>
-        <form class="personal-form">
-            <div class="personal-form__row">
-                <label>Имя</label>
-                <input type="text" name="name"/>
+    <header> MarkupMonitoring </header>
+    <nav class="menu">
+        <menu class="side__menu">
+            <button class="side__menu-item">
+                <a href="home.html">Домашняя страница</a>
+            </button>
+            <button class="side__menu-item active">
+                <a href="personal-page.html">Личный кабинет</a>
+            </button>
+            <button class="side__menu-item" >
+                <a href="workspace.html">Рабочее пространство</a>
+            </button>
+            <button class="side__menu-item">
+                <a href="../index.html">Выйти</a>
+            </button>
+        </menu>
+    </nav>
+    <main class="base-position">
+        <section class="base-position__main">
+            <div class="area-form">
+                <form class="form-edit">
+                    <div class="form-row">
+                        <label>Имя</label>
+                        <input type="text" name="name"/>
+                    </div>
+                    <div class="form-row">
+                        <label>Номер телефона</label>
+                        <input type="text" name="number-phone"/>
+                    </div>
+                    <div class="form-row">
+                        <label>Мейл</label>
+                        <input type="text" name="mail"/>
+                    </div>
+                    <div class="form-row">
+                        <label>Вк</label>
+                        <input type="text" name="vk"/>
+                    </div>
+                    <div class="form-row">
+                        <label>Логин</label>
+                        <input type="text" name="login"/>
+                    </div>
+                    <div class="form-row">
+                        <label>Пароль</label>
+                        <input type="password" name="password"/>
+                    </div>
+                    <div class="form-buttons">
+                        <button class="form-button" name="input-button" type="submit">Изменить</button>
+                    </div>
+                </form>
             </div>
-            <div class="personal-form__row">
-                <label>Номер телефона</label>
-                <input type="text" name="number-phone"/>
-            </div>
-            <div class="personal-form__row">
-                <label>Мейл</label>
-                <input type="text" name="mail"/>
-            </div>
-            <div class="personal-form__row">
-                <label>Вк</label>
-                <input type="text" name="vk"/>
-            </div>
-            <div class="personal-form__row">
-                <label>Логин</label>
-                <input type="text" name="login"/>
-            </div>
-            <div class="personal-form__row">
-                <label>Пароль</label>
-                <input type="password" name="password"/>
-            </div>
-            <div class="personal-form__row">
-                <div class="personal-change-button">
-                    <button name="input-button">Изменить</button>
-                </div>
-            </div>
-        </form>
+        </section>
     </main>
-
     <footer>
-        <p>©Тюлькина Ирина Павловна, Санкт-Петербург, 2022.</p>
+        @ Ирина Тюлькина, Санкт-Петербур, 2022
     </footer>
 </body>
 </html>
+

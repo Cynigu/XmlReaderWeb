@@ -1,0 +1,36 @@
+@import url(color-base.css);
+
+.table-area{
+    display: flex;
+    flex-direction: column;
+    overflow-x: auto;
+}
+
+.table{
+    flex: 0;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table thead{
+    background-color: var(--table-header-color);
+}
+
+.table th, .table td{
+    padding: 1%;
+    border: 1px solid var(--table-border);
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.table tr:hover td{
+    background-color: var(--table-hover-row-color);
+}
+
+.table-buttons{
+    margin: 1% 0 0 1%;
+    flex:1;
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}

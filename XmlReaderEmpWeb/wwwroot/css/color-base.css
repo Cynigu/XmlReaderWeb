@@ -1,0 +1,35 @@
+:root{
+    --main-color-one: #9a1a34;
+    --main-color-two:#96a6b8;
+    --main-color-three: #b7c5d5;
+
+    --back-color: var(--main-color-two); /*Цвет фона*/
+
+    --header-back-color: var(--main-color-two); /*Цвет заголовка*/
+    --header-text-color:var(--main-color-one); /*Цвет текста заголовка*/
+
+    --menu-back-color:#8392a3; /*Цвет фона меню*/
+    --menu-border-color:#748394; /*Цвет границ меню*/
+    --menu-hover-color: #748394; /*Кнопка менб при наведении*/
+    --menu-active-color:#69788a; /*Активная вкладка меню*/
+    --menu-text-color: var(--main-color-one); /*Текст в меню*/
+
+    --main-back-color: var(--main-color-three); /*Фон основной области*/
+    --main-text-color: var(--main-color-one); /*Цвет основного текста*/
+
+    --button-hover-main:#828d9b; /*Цвет наведения на кнопку*/
+    --button-back-color: #96a6b8; /*Фон кнопки*/
+    --button-border-color: #828d9b; /*Цвет границ кнопки*/
+    --button-text-color:var(--main-color-one); /*Цвет текста на кнопке*/
+    
+    --footer-back-color:var(--main-color-two); /*Фон футера*/
+    --footer-text-color:var(--main-color-one); /*Цвет текста футера*/
+
+    --table-header-color:var(--main-color-two); /*Цвет текста заголовка таблицы*/
+    --table-hover-row-color:#828d9b; /*Цвет при наведении на строку таблицы*/
+    --table-border: var(--main-color-one); /*Цвет границ таблицы*/
+
+    --auth-back-color: #a8b7c9; /*Фон блока авторизации*/
+
+    --shadow-color: rgba(0,0,0,0.06);
+}

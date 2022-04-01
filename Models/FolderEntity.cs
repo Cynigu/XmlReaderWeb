@@ -19,6 +19,6 @@
         public FolderStatus Status { get; set; } = FolderStatus.Process;
         public int? UserProfileId { get; set; }
         public UserProfileEntity? UserProfile { get; set; }
-        public ICollection<Image>? Image { get; set; }
+        public ICollection<ImageEntity>? Image { get; set; }
     }
 }

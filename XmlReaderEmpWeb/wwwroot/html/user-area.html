@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/base.css" type="text/css" />
+    <link rel="stylesheet" href="../css/table-base.css" type="text/css" />
+    <link rel="stylesheet" href="../css/user-area.css" type="text/css" />
+    <link rel="stylesheet" href="../css/edit.css" type="text/css" />
+    <title>Автоматизированная система оценки трудозатрат ручной разметки фотографий</title>
+</head>
+<body>
+    <header> MarkupMonitoring </header>
+    <nav class="menu">
+            <button class="menu__item" onclick="openTab(event, 'home')">Домашняя страница </button>
+            <button class="menu__item" onclick="openTab(event, 'personal-page')">Личный кабинет </button>
+            <button class="menu__item" onclick="openTab(event, 'workspace')">Рабочее пространство</button>
+            <button class="menu__item">
+                <a href="../index.html">Выйти</a>
+            </button>
+    </nav>
+    <main class="base-position">
+        <section class="section" id="workspace">
+            <div class="table-area">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Описание</th>
+                            <th>Кол-во выделенных объектов</th>
+                            <th>Кол-во выделенных файлов</th>
+                            <th>Кол-во файлов</th>
+                            <th>Статус</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>test</td>
+                            <td>test</td>
+                            <td>test</td>
+                            <td>test</td>
+                            <td>test</td>
+                            <td>test</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-buttons">
+                    <button class="button-table"><a href="folders.html">Открыть</a></button>
+                    <button class="button-table"><a href="folders.html">Добавить</a></button>
+                    <button class="button-table"><a href="workspace-edit.html">Подробнее</a></button>
+                    <button class="button-table"><a href="employees.html">Посмотреть работников проекта</a></button>
+                </div>
+            </div>
+        </section>
+        <section class="section" id="home">
+            <article class="index-main__about-programm">
+                <p class="index-main__about-programm-header">Информация о проекте:</p>
+                <p class="index-main__about-programm-info">Автоматизированная система оценки трудозатрат ручной разметки фотографий</p>
+                <p class="index-main__about-programm-info">Организация: СПбГТИ(ТУ)</p>
+                <p class="index-main__about-programm-info">Выполнила: Тюлькина Ирина Павловна</p>
+                <p class="index-main__about-programm-info">Группа: 494</p>
+                <p class="index-main__about-programm-info">Курс: 3</p>
+                <p class="index-main__about-programm-info">Санкт-Петербург, 2022</p>
+            </article>
+        </section>
+        <section class="section" id="personal-page">
+            <div class="edit-element-area">
+                <div class="edit">
+                    <div class="edit-row">
+                        <label>Имя</label>
+                        <input type="text" name="name"/>
+                    </div>
+                    <div class="edit-row">
+                        <label>Номер телефона</label>
+                        <input type="text" name="number-phone"/>
+                    </div>
+                    <div class="edit-row">
+                        <label>Мейл</label>
+                        <input type="text" name="mail"/>
+                    </div>
+                    <div class="edit-row">
+                        <label>Вк</label>
+                        <input type="text" name="vk"/>
+                    </div>
+                    <div class="edit-row">
+                        <label>Логин</label>
+                        <input type="text" name="login"/>
+                    </div>
+                    <div class="edit-row">
+                        <label>Пароль</label>
+                        <input type="password" name="password"/>
+                    </div>
+                    <div class="edit-buttons">
+                        <button class="form-button" name="input-button" type="submit">Изменить</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <footer>
+        @ Ирина Тюлькина, Санкт-Петербур, 2022
+    </footer>
+    <script src="../js/user-area.js"></script>
+</body>
+</html>

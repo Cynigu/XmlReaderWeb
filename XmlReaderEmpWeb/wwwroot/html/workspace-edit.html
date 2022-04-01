@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/base.css" type="text/css" />
+    <link rel="stylesheet" href="../css/edit.css" type="text/css" />
+    <link rel="stylesheet" href="../css/foring-page.css" type="text/css" />
+    <title>Автоматизированная система оценки трудозатрат ручной разметки фотографий</title>
+</head>
+<body>
+    <header> MarkupMonitoring </header>
+    <nav class="menu">
+        <menu class="side__menu">
+            <button class="side__menu-item">
+                <a href="home.html">Домашняя страница</a>
+            </button>
+            <button class="side__menu-item">
+                <a href="personal-page.html">Личный кабинет</a>
+            </button>
+            <button class="side__menu-item active" >
+                <a href="workspace.html">Рабочее пространство</a>
+            </button>
+            <button class="side__menu-item">
+                <a href="../index.html">Выйти</a>
+            </button>
+        </menu>
+    </nav>
+    <main class="base-position">
+        <section class="base-position__main">
+            <label class="header-main">Подробности проекта</label>
+            <div class="area-form">
+                <div class="form-row">
+                    <label>Описание</label>
+                    <input type="text" name="desciption"/>
+                </div>
+                <div class="form-row">
+                    <label>Руководитель</label>
+                    <input type="text" name="leader"/>
+                </div>
+                <div class="form-row">
+                    <label>Дата начала</label>
+                    <input type="datetime" name="date-start"/>
+                </div>
+                <div class="form-row">
+                    <label>Дата окончания</label>
+                    <input type="datetime" name="date-end"/>
+                </div>
+                <div class="form-row">
+                    <label>Статус</label>
+                    <input type="text" name="status"/>
+                </div>
+                <div  class="edit-buttons">
+                    <button class="edit-button" name="open-project-button"><a href="folders.html">Открыть</a></button>
+                    <button class="edit-button" name="idet-project-button"><a href="#">Изменить</a></button>
+                    <button class="edit-button" name="idet-project-button"><a href="#">Удалить</a></button>
+                    <button class="edit-button" name="idet-project-button"><a href="#">Сбросить</a></button>
+                    <button class="edit-button" name="emp-project-button"><a href="employees.html">Посмотреть работников проекта</a></button>
+                </div>
+            </div>
+            
+            <div class="main-buttons">
+                <button name="back-project-button"><a href="workspace.html">Назад</a></button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        @ Ирина Тюлькина, Санкт-Петербур, 2022
+    </footer>
+</body>
+</html>

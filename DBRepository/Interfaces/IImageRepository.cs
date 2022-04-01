@@ -2,6 +2,6 @@
 
 namespace XmlReader.Data.DBRepository.Interfaces;
 
-public interface IImageRepository : IRepository<Image>
+public interface IImageRepository : IRepository<ImageEntity>
 {
 }
