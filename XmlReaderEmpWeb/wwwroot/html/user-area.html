@@ -2,6 +2,7 @@
 
 <html lang="ru">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css" type="text/css" />
     <link rel="stylesheet" href="../css/table-base.css" type="text/css" />
@@ -12,12 +13,13 @@
 <body>
     <header> MarkupMonitoring </header>
     <nav class="menu">
-            <button class="menu__item" onclick="openTab(event, 'home')">Домашняя страница </button>
-            <button class="menu__item" onclick="openTab(event, 'personal-page')">Личный кабинет </button>
-            <button class="menu__item" onclick="openTab(event, 'workspace')">Рабочее пространство</button>
-            <button class="menu__item">
-                <a href="../index.html">Выйти</a>
-            </button>
+        <button class="menu__item" onclick="openTab(event, 'home')">Домашняя страница </button>
+        <button class="menu__item" onclick="openTab(event, 'personal-page')">Личный кабинет </button>
+        <button class="menu__item" onclick="openTab(event, 'workspace')">Рабочее пространство</button>
+        <button class="menu__item" onclick="openTab(event, 'compute-folder')">Рассчитать зарплату</button>
+        <button class="menu__item">
+            <a href="../index.html">Выйти</a>
+        </button>
     </nav>
     <main class="base-position">
         <section class="section" id="workspace">
@@ -68,27 +70,27 @@
                 <div class="edit">
                     <div class="edit-row">
                         <label>Имя</label>
-                        <input type="text" name="name"/>
+                        <input type="text" name="name" />
                     </div>
                     <div class="edit-row">
                         <label>Номер телефона</label>
-                        <input type="text" name="number-phone"/>
+                        <input type="text" name="number-phone" />
                     </div>
                     <div class="edit-row">
                         <label>Мейл</label>
-                        <input type="text" name="mail"/>
+                        <input type="text" name="mail" />
                     </div>
                     <div class="edit-row">
                         <label>Вк</label>
-                        <input type="text" name="vk"/>
+                        <input type="text" name="vk" />
                     </div>
                     <div class="edit-row">
                         <label>Логин</label>
-                        <input type="text" name="login"/>
+                        <input type="text" name="login" />
                     </div>
                     <div class="edit-row">
                         <label>Пароль</label>
-                        <input type="password" name="password"/>
+                        <input type="password" name="password" />
                     </div>
                     <div class="edit-buttons">
                         <button class="form-button" name="input-button" type="submit">Изменить</button>
@@ -96,10 +98,25 @@
                 </div>
             </div>
         </section>
+        <section class="section" id="compute-folder">
+            <h1>Расчет зарплаты по xml файлам в папке</h1>
+            <div>
+                <label>Ставка:</label>
+                <input id="bet" type="number" />
+            </div>
+            <div class="input-file">
+                <label for="file">Введите путь к папке</label>
+                <input id="file" type="text" />
+                <button onclick="computeObject()">Рассчитать</button>
+            </div>
+            <div id="about-folder">
+            </div>
+        </section>
     </main>
     <footer>
         @ Ирина Тюлькина, Санкт-Петербур, 2022
     </footer>
-    <script src="../js/user-area.js"></script>
+<script src="../js/user-area.js"></script>
+<script src="../js/compute-file.js"></script>
 </body>
 </html>

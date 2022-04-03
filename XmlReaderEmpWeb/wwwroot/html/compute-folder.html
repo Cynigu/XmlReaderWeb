@@ -2,6 +2,7 @@
 
 <html lang="ru">
 <head>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/base.css" type="text/css" />
     <link rel="stylesheet" href="../css/table-base.css" type="text/css" />
@@ -55,10 +56,15 @@
         <section class="section" id="compute-folder" style="display: flex;">
             <h1>Расчет зарплаты по xml файлам в папке</h1>
             <div class="input-file">
+                <div>
+                    <label>Ставка:</label>
+                    <input id="bet" type="number" />
+                </div>
+                
                 <input id="files" type="file" multiple/>
+                <label id="count-object">
+                </label>
             </div>
-            <label id="count-object">
-            </label>
         </section>
     </main>
     <footer>
