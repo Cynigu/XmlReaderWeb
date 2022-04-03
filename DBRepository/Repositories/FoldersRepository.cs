@@ -10,11 +10,4 @@ namespace XmlReader.Data.DBRepository.Repositories
         {
         }
     }
-
-    public class ImageRepository : DataBaseRepository<ImageEntity, RepositoryContext>, IImageRepository
-    {
-        public ImageRepository(RepositoryContext context) : base(context)
-        {
-        }
-    }
 }
