@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Microsoft.AspNetCore.Http;
 using XmlReader.BLL.Models.Models;
 using XmlReader.BLL.Service.Interfaces;
 
@@ -11,6 +12,27 @@ namespace XmlReader.BLL.Service.Services
 {
     public class ComputeObjectXmlService: IComputeObjectXmlService
     {
+        public int GetCountObject(IFormFileCollection files)
+        {
+            int countObject = 0;
+            foreach (var file in files)
+            {
+                using (var reader = new StreamReader(file.OpenReadStream()))
+                {
+                    while (reader.Peek() >= 0)
+                    {
+                        var line = reader.ReadLine();   
+                        if (line != null && line.Contains("<object>"))
+                        {
+                            countObject++;
+                        }
+                    }
+                }
+            }
+
+            return countObject;
+        }
+
         public FolderInfo GetFolderInfoXml(string pathFolder, float bet)
         {
             var paths = Directory.EnumerateFiles(@pathFolder, "*.xml");
@@ -35,7 +57,6 @@ namespace XmlReader.BLL.Service.Services
 
             return folderInfo;
         }
-
         private static float ComputeSalary(int countObject, float betForObject)
         {
             return countObject * betForObject;

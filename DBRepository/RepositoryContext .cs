@@ -40,8 +40,8 @@ namespace DBRepository
                 Vk = "null"
             };
             modelBuilder.Entity<ImageEntity>().Property(p => p.ImageByte).HasColumnType("image");
-            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 1, Login="admin", Password="admin", Role = UserRole.Admin});
-            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 2, Login = "user", Password = "user", Role = UserRole.User });
+            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 1, Login="admin", Password="admin", Role = "admin"});
+            modelBuilder.Entity<AuthUserEntity>().HasData(new AuthUserEntity { Id = 2, Login = "user", Password = "user", Role = "user" });
             modelBuilder.Entity<UserProfileEntity>().HasData(admin, emp);
 
             modelBuilder.Entity<WorkspaceEntity>()

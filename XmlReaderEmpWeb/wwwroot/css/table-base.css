@@ -4,26 +4,27 @@
     display: flex;
     flex-direction: column;
     overflow-x: auto;
+    margin-top: 3px;
 }
 
-.table{
+table, .table{
     flex: 0;
     width: 100%;
     border-collapse: collapse;
 }
 
-.table thead{
+.table thead, table thead{
     background-color: var(--table-header-color);
 }
 
-.table th, .table td{
+.table th, .table td, table th, table td{
     padding: 1%;
     border: 1px solid var(--table-border);
     border-collapse: collapse;
     text-align: left;
 }
 
-.table tr:hover td{
+.table tr:hover td, table tr:hover td{
     background-color: var(--table-hover-row-color);
 }
 

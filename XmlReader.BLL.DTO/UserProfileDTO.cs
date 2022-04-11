@@ -8,7 +8,5 @@
         public string? Email { get; set; }
         public string? Vk { get; set; }
         public int AuthUserId { get; set; }
-        public AuthUserDTO AuthUserDto { get; set; }
-        public ICollection<WorkspaceDTO>? Workspaces { get; set; }
     }
 }

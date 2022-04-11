@@ -1,4 +1,6 @@
-﻿namespace XmlReader.BLL.Models.Models
+﻿using Microsoft.AspNetCore.Http;
+
+namespace XmlReader.BLL.Models.Models
 {
     public class FolderInfo
     {

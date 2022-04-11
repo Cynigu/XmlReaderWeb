@@ -20,3 +20,33 @@ function input(loginId, passId){
         window.alert("Вход пользователя");
     }
 }
+
+function login(loginId, passId){
+    var login = document.getElementById(loginId).value;
+    var pass = document.getElementById(passId).value;
+    var url = '/api/Account/LoginAsync';
+    fetch(url,
+        {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({ login: login, password: pass, rememberMe: false})
+        })
+        .then(response => response.text())
+        .then(data => {
+            window.alert(data);
+            if(data == "user"){
+                document.location.href = "html/user-area.html";
+            }
+            else if(data=="admin"){
+                document.location.href = "html/employees.html";
+            }
+            else {
+                window.alert(data);
+            }
+        })
+        .catch(
+            (e) => {
+            window.alert('Error: ' + e.message);
+            }
+        );
+}

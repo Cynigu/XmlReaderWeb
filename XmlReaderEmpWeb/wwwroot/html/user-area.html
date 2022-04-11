@@ -100,16 +100,21 @@
         </section>
         <section class="section" id="compute-folder">
             <h1>Расчет зарплаты по xml файлам в папке</h1>
-            <div>
-                <label>Ставка:</label>
-                <input id="bet" type="number" />
+            <div class="compute-file-info">
+                <div class="input-bet">
+                    <label>Ставка:</label>
+                    <input id="bet" type="number" />
+                </div>
+                <div class="input-file">
+                    <input id="files" type="file" accept=".xml" multiple/>
+                    <button onclick="computeObject()">Рассчитать</button>
+                </div>
             </div>
-            <div class="input-file">
-                <label for="file">Введите путь к папке</label>
-                <input id="file" type="text" />
-                <button onclick="computeObject()">Рассчитать</button>
-            </div>
-            <div id="about-folder">
+            <div class="table-area">
+                <table id="table-about-folder" class="table">
+                    <tbody id="table-about-folder-body">
+                    </tbody>
+                </table>
             </div>
         </section>
     </main>

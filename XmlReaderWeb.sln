@@ -23,7 +23,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BLL", "BLL", "{20C34C38-613
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.BLL.Models", "XmlReader.BLL.DTO\XmlReader.BLL.Models.csproj", "{AC5EAE56-0B02-451D-BEEB-A6AEF0B69120}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlReader.Web.WebServer", "XmlReader.Web.WebServer\XmlReader.Web.WebServer.csproj", "{7194E742-A233-48A0-9CBC-9B78E0393F9B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XmlReader.Web.WebServerSwagger", "XmlReader.Web.WebServer\XmlReader.Web.WebServerSwagger.csproj", "{7194E742-A233-48A0-9CBC-9B78E0393F9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using XmlReader.BLL.Models.Models;
 using XmlReader.BLL.Service.Interfaces;
 
@@ -15,15 +17,16 @@ public class ComputeObjectController : Controller
         this._computeObjectXmlService = empService;
     }
 
+    
     [HttpPost]
-    public ActionResult<FolderInfo> GetFolderInfoXml([FromBody] FolderInfo folderInfo)
+    [Authorize(Roles = "user")]
+    public ActionResult<int> GetCountObject(IFormFileCollection files)
     {
-        if (string.IsNullOrEmpty(folderInfo.FolderPath))
+        if (files.Count <= 0)
         {
-            return folderInfo;
+            return 0;
         }
-        var folderComputedInfo = _computeObjectXmlService.GetFolderInfoXml(folderInfo.FolderPath, folderInfo.Bet);
-        return folderComputedInfo;
+        var countObject = _computeObjectXmlService.GetCountObject(files);
+        return countObject;
     }
-
 }
