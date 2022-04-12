@@ -22,28 +22,26 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+    [Authorize]
     public IActionResult GetRole()
     {
         if (HttpContext.User.IsInRole("user"))
         {
             return Content("user");
         }
-        else
+        else if (HttpContext.User.IsInRole("admin"))
         {
             return Content("admin");
         }
+        else
+        {
+            return new BadRequestObjectResult(new { Message = "Роль не найдена" });
+        }
     }
 
-    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> LoginAsync([FromBody] LoginModel model)
     {
-        if (!ModelState.IsValid)
-        {
-            return new BadRequestObjectResult(new {Message = "User Registration Failed"});
-        }
-
         var user = _accountService.FindAccountByLoginPasswordAsync(model);
 
         if (user != null)
@@ -52,10 +50,9 @@ public class AccountController : Controller
             return Content(user.Role);
         }
 
-        return new BadRequestObjectResult(new {Message = "Некорректные логин и(или) пароль"});
+        return new BadRequestObjectResult(new { Message = "Некорректные логин и(или) пароль" });
     }
 
-    [AllowAnonymous]
     [HttpPost]
     public async Task<ActionResult> RegisterAsync([FromBody] RegisterModel model)
     {

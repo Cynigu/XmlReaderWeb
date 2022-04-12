@@ -7,13 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Models\XmlReader.Data.Models.csproj" />
-    <ProjectReference Include="..\XmlReader.BLL.DTO\XmlReader.BLL.Models.csproj" />
+    <Compile Remove="ToEntity\**" />
+    <Compile Remove="ToModel\**" />
+    <EmbeddedResource Remove="ToEntity\**" />
+    <EmbeddedResource Remove="ToModel\**" />
+    <None Remove="ToEntity\**" />
+    <None Remove="ToModel\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ToEntity\" />
-    <Folder Include="ToModel\" />
+    <ProjectReference Include="..\Models\XmlReader.Data.Models.csproj" />
+    <ProjectReference Include="..\XmlReader.BLL.DTO\XmlReader.BLL.Models.csproj" />
   </ItemGroup>
 
 </Project>

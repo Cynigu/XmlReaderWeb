@@ -24,7 +24,7 @@ function input(loginId, passId){
 function login(loginId, passId){
     var login = document.getElementById(loginId).value;
     var pass = document.getElementById(passId).value;
-    var url = '/api/Account/LoginAsync';
+    var url = '/api/Account/Login';
     fetch(url,
         {
             method: 'POST',
@@ -33,11 +33,10 @@ function login(loginId, passId){
         })
         .then(response => response.text())
         .then(data => {
-            window.alert(data);
-            if(data == "user"){
+            if (data == "user") {
                 document.location.href = "html/user-area.html";
             }
-            else if(data=="admin"){
+            else if (data == "admin") {
                 document.location.href = "html/employees.html";
             }
             else {
