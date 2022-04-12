@@ -66,10 +66,10 @@ public class AccountController : Controller
             if (userRegistred != null)
             {
                 await AuthenticateAsync(userRegistred); // аутентификация
-                return Ok(new { Role = userRegistred.Role });
+                return Content( userRegistred.Role);
             }
         }
-        return new BadRequestObjectResult(new { Message = "Регистрация завершилась неудачно" });
+        return new BadRequestObjectResult(new { Message = "Такой пользователь уже существует!" });
     }
 
     private async Task AuthenticateAsync(UserModel model)

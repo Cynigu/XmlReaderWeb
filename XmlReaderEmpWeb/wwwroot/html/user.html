@@ -17,9 +17,7 @@
         <button class="menu__item" onclick="openTab(event, 'personal-page')">Личный кабинет </button>
         <button class="menu__item" onclick="openTab(event, 'workspace')">Рабочее пространство</button>
         <button class="menu__item" onclick="openTab(event, 'compute-folder')">Рассчитать зарплату</button>
-        <button class="menu__item">
-            <a href="../index.html">Выйти</a>
-        </button>
+        <button class="menu__item" onclick="logout()">Выйти</button>
     </nav>
     <main class="base-position">
         <section class="section" id="workspace">
@@ -125,5 +123,6 @@
     </footer>
 <script src="../js/user.js"></script>
 <script src="../js/compute-file.js"></script>
+<script src="../js/auth.js"></script>
 </body>
 </html>
