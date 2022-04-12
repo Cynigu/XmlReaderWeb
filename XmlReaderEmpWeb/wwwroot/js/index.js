@@ -71,10 +71,10 @@ function login(loginId, passId){
         .then(response => response.text())
         .then(data => {
             if (data == "user") {
-                document.location.href = "html/user-area.html";
+                document.location.href = "html/user.html";
             }
             else if (data == "admin") {
-                document.location.href = "html/employees.html";
+                document.location.href = "html/admin.html";
             }
             else {
                 window.alert(data);
