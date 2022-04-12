@@ -23,10 +23,10 @@ namespace XmlReader.BLL.Models.AuthModels
         [Required(ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
 
-        public string Email { get; set; }
-        public string Vk { get; set; }
-        public string NumberPhone { get; set; }
-        public UserRole Role { get; set; } = UserRole.User;
+        public string? Email { get; set; }
+        public string? Vk { get; set; }
+        public string? NumberPhone { get; set; }
+        public string Role { get; set; } = "user";
         public bool RememberMe { get; set; } = true;
     }
 }

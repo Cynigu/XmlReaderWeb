@@ -1,7 +1,8 @@
-using DBRepository;
-using Microsoft.EntityFrameworkCore;
 using DBRepository.Factories;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Formatting.Compact;
 using XmlReader.BLL.Service.Interfaces;
 using XmlReader.BLL.Service.Services;
 using XmlReader.Data.DBRepository.Factories;
@@ -9,6 +10,13 @@ using XmlReader.Data.DBRepository.Factories;
 var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+// логгирование 
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Debug(new RenderedCompactJsonFormatter())
+    .WriteTo.File("logs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
 
 //Авторизация
 builder.Services.AddAuthorization();

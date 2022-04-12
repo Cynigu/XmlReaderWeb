@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/base.css" type="text/css" />
+    <link rel="stylesheet" href="css/index.css" type="text/css" />
     <link rel="stylesheet" href="css/auth-base.css" type="text/css" />
     <title>Автоматизированная система оценки трудозатрат ручной разметки фотографий</title>
 </head>
@@ -70,18 +71,18 @@
                     </div>
                     <div class="auth-form__row">
                         <label>Мейл:</label>
-                        <input type="text" id="mail"/>
+                        <input type="text" id="email"/>
                     </div>
                     <div class="auth-form__row">
                         <label>Пароль:</label>
-                        <input type="password" id="pass-registr"/>
+                        <input type="password" id="pass-register"/>
                     </div>
                     <div class="auth-form__row">
                         <label>Повторите пароль:</label>
-                        <input type="password" id="pass-registr-two"/>
+                        <input type="password" id="pass-register-two"/>
                     </div>
                     <div class="auth-form__button">
-                        <button class="auth-button"><a href="html/user-area.html">Зарегистрироваться</a></button>
+                        <button class="auth-button" onclick="Register('name', 'number-phone', 'vk', 'email', 'pass-register', 'pass-register-two', 'login-registr')">Зарегистрироваться</a></button>
                         <button class="auth-button" onclick="openAuthForm(event,'auth-form')">Уже есть аккаунт</button>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using XmlReader.BLL.DTO;
 using XmlReader.BLL.Models.AuthModels;
 using XmlReader.BLL.Models.Models;
@@ -15,10 +16,11 @@ namespace XmlReader.WEB.Controllers;
 public class AccountController : Controller
 {
     private readonly IAccountService _accountService;
-
-    public AccountController(IAccountService accountService)
+    private readonly ILogger<AccountController> _logger;
+    public AccountController(IAccountService accountService, ILogger<AccountController> logger)
     {
         _accountService = accountService;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -56,14 +58,9 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<ActionResult> RegisterAsync([FromBody] RegisterModel model)
     {
-        //User user = await db.Users.FirstOrDefaultAsync(u => u.Email == model.Email);
         var user = await _accountService.FindAccountByLoginAsync(model.Login);
         if (user == null)
         {
-            //// добавляем пользователя в бд
-            //db.Users.Add(new User { Email = model.Email, Password = model.Password });
-            //await db.SaveChangesAsync();
-
             await _accountService.RegisterAccountAsync(model);
             var userRegistred = await _accountService.FindAccountByLoginAsync(model.Login);
             if (userRegistred != null)
