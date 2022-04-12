@@ -11,13 +11,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
-// логгирование 
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
-    .WriteTo.Debug(new RenderedCompactJsonFormatter())
-    .WriteTo.File("logs.txt", rollingInterval: RollingInterval.Day)
-    .CreateLogger();
-
 //Авторизация
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -34,6 +27,7 @@ builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryCon
 // Services
 builder.Services.AddScoped<IComputeObjectXmlService, ComputeObjectXmlService>();
 builder.Services.AddScoped<IAccountService>(op => new AccountService(op.GetRequiredService<IRepositoryContextFactory>()));
+builder.Services.AddScoped<IUserProfileService>(op => new UserProfileService(op.GetRequiredService<IRepositoryContextFactory>()));
 
 //Controllers
 builder.Services.AddControllers();

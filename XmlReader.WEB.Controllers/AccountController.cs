@@ -78,7 +78,8 @@ public class AccountController : Controller
         var claims = new List<Claim>
             {
                 new Claim(ClaimsIdentity.DefaultNameClaimType, model.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, model.Role)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, model.Role),
+                new Claim(ClaimTypes.NameIdentifier, model.AccountId.ToString())
             };
         // создаем объект ClaimsIdentity
         ClaimsIdentity id = new ClaimsIdentity(claims, "ApplicationCookie", 

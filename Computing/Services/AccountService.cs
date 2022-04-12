@@ -38,7 +38,7 @@ namespace XmlReader.BLL.Service.Services
 
             return new UserModel()
             {
-                Id = user.Id,
+                AccountId = user.Id,
                 Login = user.Login,
                 Role = user.Role,
                 RememberMe = userAuth.RememberMe
@@ -79,7 +79,7 @@ namespace XmlReader.BLL.Service.Services
                 {
                     await uow.UserProfileRepository.AddAsync(new UserProfileEntity()
                     {
-                        AuthUserId = registerUser.Id,
+                        AuthUserId = registerUser.AccountId,
                         Email = registerModel.Email,
                         Name = registerModel.Name,
                         NumberPhone = registerModel.NumberPhone,
@@ -89,7 +89,7 @@ namespace XmlReader.BLL.Service.Services
                     return new UserModel()
                     {
                         Login = registerModel.Login,
-                        Id = registerUser.Id,
+                        AccountId = registerUser.AccountId,
                         RememberMe = registerModel.RememberMe,
                         Role = registerUser.Role
                     };
@@ -111,7 +111,7 @@ namespace XmlReader.BLL.Service.Services
                 {
                     Login = user.Login,
                     Role = user.Role,
-                    Id = user.Id,
+                    AccountId = user.Id,
                     RememberMe = true
                 };
             }
