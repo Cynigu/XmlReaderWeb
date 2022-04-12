@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DBRepository.Factories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Models;
 using Models.auth;
 using XmlReader.BLL.Models.AuthModels;
 using XmlReader.BLL.Service.Interfaces;
@@ -25,9 +26,11 @@ namespace XmlReader.BLL.Service.Services
         public UserModel? FindAccountByLoginPasswordAsync(LoginModel userAuth)
         {
             using var uow = new UnitOfWork(_repositoryContextFactory.Create());
+            // Поиск пользователя по логину и паролю
             var user = uow.AuthUserRepository.GetEntityQuery()
                 .FirstOrDefault(x => x.Login == userAuth.Login && x.Password == userAuth.Password);
 
+            // если пользователь не найден
             if (user == null)
             {
                 return null;
@@ -45,28 +48,44 @@ namespace XmlReader.BLL.Service.Services
         public async Task<UserModel?> RegisterAccountAsync(RegisterModel registerModel)
         {
             using var uow = new UnitOfWork(_repositoryContextFactory.Create());
+
+            // ищем пользователя по логину
             var user = await FindAccountByLoginAsync(registerModel.Login);
+
+            // Если пользователь найден, то регистрация не может быть проведена 
             if (user != null)
             {
                 throw new AuthenticationException("Пользователь с таким логином существует");
             }
             else
             {
+                // Добавляем пользователя
                 await uow.AuthUserRepository.AddAsync(new AuthUserEntity()
                 {
                     Login = registerModel.Login,
                     Password = registerModel.Password,
                     Role = registerModel.Role
                 });
-
+                
+                // Ищем пользователя (ради Id)
                 var registerUser = await FindAccountByLoginAsync(registerModel.Login);
 
+                // Если каким-то образом созданный аккаунт не найден
                 if (registerUser == null)
                 {
                     throw new AuthenticationException("Что-то пошло не так!");
                 }
                 else
                 {
+                    await uow.UserProfileRepository.AddAsync(new UserProfileEntity()
+                    {
+                        AuthUserId = registerUser.Id,
+                        Email = registerModel.Email,
+                        Name = registerModel.Name,
+                        NumberPhone = registerModel.NumberPhone,
+                        Vk = registerModel.Vk
+                    });
+
                     return new UserModel()
                     {
                         Login = registerModel.Login,
@@ -96,7 +115,6 @@ namespace XmlReader.BLL.Service.Services
                     RememberMe = true
                 };
             }
-            
         }
     }
 }
