@@ -32,6 +32,17 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
+async function findUsersAsync(){
+    var url = '/api/UserProfile/GetUsersInfosByFilter';
+    var searchStr = document.getElementById('login').value;
+    let searchClass = {
+        searchStr: searchStr
+    }
+
+    let response = postRequestJsonAsync(searchClass, url);
+
+    // Вывести в таблицу
+}
 
 function _displayUsersInfo(bet, countObject){
     var tbodyAboutFolder = document.getElementById('table-users-body');
@@ -65,10 +76,4 @@ function _displayUsersInfo(bet, countObject){
     let td4 = document.createElement('td');
     td4.innerHTML = countObject * bet;
     tr4.appendChild(td4);
-}
-
-async function findUsersAsync(){
-    var url = '/api/ComputeObject/GetFolderInfoXml';
-    var searchStr = document.getElementById('login');
-    
 }
