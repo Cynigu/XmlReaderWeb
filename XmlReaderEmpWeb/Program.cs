@@ -35,6 +35,7 @@ builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddMvc()
             .AddApplicationPart(typeof(XmlReader.WEB.Controllers.ComputeObjectController).Assembly)
             .AddApplicationPart(typeof(XmlReader.WEB.Controllers.AccountController).Assembly)
+            .AddApplicationPart(typeof(XmlReader.WEB.Controllers.UserProfileController).Assembly)
             .AddControllersAsServices();
 
 var app = builder.Build();
