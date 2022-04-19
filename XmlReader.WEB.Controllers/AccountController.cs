@@ -22,7 +22,7 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    [Authorize]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
     public IActionResult GetRole()
     {
         if (HttpContext.User.IsInRole("user"))

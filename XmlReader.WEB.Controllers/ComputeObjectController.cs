@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using XmlReader.BLL.Models.Models;
@@ -19,7 +20,7 @@ public class ComputeObjectController : Controller
 
     
     [HttpPost]
-    [Authorize(Roles = "user")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "user")]
     public ActionResult<int> GetCountObject(IFormFileCollection files)
     {
         if (files.Count <= 0)

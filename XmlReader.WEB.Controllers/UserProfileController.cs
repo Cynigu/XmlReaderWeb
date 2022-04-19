@@ -39,7 +39,7 @@ public class UserProfileController : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = "admin")]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "admin")]
     public async Task<ICollection<UserInfo>> GetUsersInfosByFilterAsync([FromBody] Filter filter)
     {
 
