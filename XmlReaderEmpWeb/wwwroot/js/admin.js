@@ -1,15 +1,17 @@
-async function onloadFunction(){
-    let menuItemUsers =  document.getElementById('menu__item-users');
-    let menuItemHome =  document.getElementById('menu__item-home');
-    let menuItemLogout =  document.getElementById('menu__item-logout');
+async function onloadFunction() {
+    let menuItemUsers = document.getElementById('menu__item-users');
+    let menuItemHome = document.getElementById('menu__item-home');
+    let menuItemLogout = document.getElementById('menu__item-logout');
+    let login = document.getElementById('login');
+    let buttonFindUsers = document.getElementById('button__find-user');
 
-    menuItemHome.addEventListener('click', event => openTab(event, "home") );
-    menuItemUsers.addEventListener('click', event => openTab(event, "users") );
-    menuItemLogout.addEventListener('click', () => logout() );
+    menuItemHome.addEventListener('click', event => openTab(event, "home"));
+    menuItemUsers.addEventListener('click', event => openTab(event, "users"));
+    menuItemUsers.addEventListener('click', async () => findUsersAsync(login));
+    menuItemLogout.addEventListener('click', () => _logout());
 
-    menuItemUsers.addEventListener('click', await findUsersAsync());
+    buttonFindUsers.addEventListener('click', async () => findUsersAsync(login));
 }
-
 
 function openTab(evt, tabName) {
     // Declare all variables
@@ -32,48 +34,102 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-async function findUsersAsync(){
+async function findUsersAsync(login) {
     var url = '/api/UserProfile/GetUsersInfosByFilter';
-    var searchStr = document.getElementById('login').value;
-    let searchClass = {
-        searchStr: searchStr
-    }
-
-    let response = postRequestJsonAsync(searchClass, url);
-
-    // Вывести в таблицу
+    var searchStr = login.value ?? "";
+    fetch(url,
+        {
+            method: 'POST',
+            headers: { "Accept": "application/json" , 'Content-Type': 'application/json' },
+            body: JSON.stringify({searchStr: searchStr})
+        })
+        .then(response => response.json())
+        .then(data => _displayUsersInfo(data))
+        .catch(ex => 
+            window.alert(ex.message)
+        );
 }
 
-function _displayUsersInfo(bet, countObject){
-    var tbodyAboutFolder = document.getElementById('table-users-body');
-    while( tbodyAboutFolder.rows.length > 0) tbodyAboutFolder.rows[0].remove();
+function _displayUsersInfo(data) {
+    // Добавить кнопку "удалить"
+    var tbody = document.getElementById('table-users-body');
+    while (tbody.rows.length > 0) tbody.rows[0].remove();
 
-    let tr2 = document.createElement('tr');
-    tbodyAboutFolder.appendChild(tr2);
-    let tr3 = document.createElement('tr');
-    tbodyAboutFolder.appendChild(tr3);
-    let tr4 = document.createElement('tr');
-    tbodyAboutFolder.appendChild(tr4);
-    let tr5 = document.createElement('tr');
-    tbodyAboutFolder.appendChild(tr5);
+    // Создаем основную строку
+    let mainRow = document.createElement('tr');
 
+    // Заполняем заголовки
+    let th1 = document.createElement('th');
     let th2 = document.createElement('th');
-    th2.innerHTML = "Ставка";
-    tr2.appendChild(th2);
     let th3 = document.createElement('th');
-    th3.innerHTML = "Кол-во объектов";
-    tr3.appendChild(th3);
     let th4 = document.createElement('th');
-    th4.innerHTML = "Зарплата";
-    tr4.appendChild(th4);
+    let th5 = document.createElement('th');
+    let th6 = document.createElement('th');
+    let th7 = document.createElement('th');
+    th1.innerHTML = "Логин";
+    th2.innerHTML = "Пароль";
+    th3.innerHTML = "Имя";
+    th4.innerHTML = "Мейл";
+    th5.innerHTML = "Вк";
+    th6.innerHTML = "Номер телефона";
+    th7.innerHTML = "       ";
+    mainRow.appendChild(th1);
+    mainRow.appendChild(th2);
+    mainRow.appendChild(th3);
+    mainRow.appendChild(th4);
+    mainRow.appendChild(th5);
+    mainRow.appendChild(th6);
+    mainRow.appendChild(th7);
 
-    let td2 = document.createElement('td');
-    td2.innerHTML = bet;
-    tr2.appendChild(td2);
-    let td3 = document.createElement('td');
-    td3.innerHTML = countObject;
-    tr3.appendChild(td3);
-    let td4 = document.createElement('td');
-    td4.innerHTML = countObject * bet;
-    tr4.appendChild(td4);
+    data.forEach(element => {
+        // Создаем основную строку
+        let row = document.createElement('tr');
+
+        let td1 = document.createElement('td');
+        let td2 = document.createElement('td');
+        let td3 = document.createElement('td');
+        let td4 = document.createElement('td');
+        let td5 = document.createElement('td');
+        let td6 = document.createElement('td');
+        let td7 = document.createElement('td');
+        td1.innerHTML = element.login;
+        td2.innerHTML = element.password;
+        td3.innerHTML = element.name;
+        td4.innerHTML = element.email;
+        td5.innerHTML = element.vk;
+        td6.innerHTML = element.numberPhone;
+        td7.innerHTML = "Тут будет кнопка наверно";
+        row.appendChild(td1);
+        row.appendChild(td2);
+        row.appendChild(td3);
+        row.appendChild(td4);
+        row.appendChild(td5);
+        row.appendChild(td6);
+        row.appendChild(td7);
+    });
+}
+
+
+function _logout(){
+    var url = '/api/Account/Logout';
+    fetch(url,
+        {
+            method: 'GET',
+            headers: {'Content-Type': 'application/json' },
+        })
+        .then(response => response.text())
+        .then(data => {
+            if (data == "logout"){
+                document.location.href = "../index.html";
+            }
+        })
+        .catch(
+            (e) => {
+            window.alert('Error: ' + e.message);
+            }
+        );
+}
+
+async function _postRequestJsonAsync(requestClass, url) {
+    
 }

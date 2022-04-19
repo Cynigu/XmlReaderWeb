@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DBRepository.Factories;
+using Microsoft.EntityFrameworkCore;
 using XmlReader.BLL.Models.Models;
 using XmlReader.BLL.Service.Interfaces;
 using XmlReader.Data.DBRepository.Interfaces;
@@ -55,6 +56,28 @@ namespace XmlReader.BLL.Service.Services
             }
 
             return userInfo;
+        }
+
+        public async Task<ICollection<UserInfo>> GetUsersInfosByLoginAsync(string searchStr)
+        {
+            ICollection<UserInfo> users;
+            using (var uow = new UnitOfWork(_repositoryContextFactory.Create()))
+            {
+                var accounts = uow.AuthUserRepository.GetEntityQuery()
+                    .Where(x => x.Login.Contains(searchStr))
+                    .Select(user => new UserInfo()
+                    {
+                        Login = user.Login,
+                        Password = user.Password,
+                        Name = user.UserProfile.Name,
+                        NumberPhone = user.UserProfile.NumberPhone,
+                        Vk = user.UserProfile.Vk,
+                        Email = user.UserProfile.Email
+                    });
+                users = await accounts.ToListAsync();
+            }
+
+            return users;
         }
     }
 }

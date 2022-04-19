@@ -31,6 +31,7 @@ builder.Services.AddScoped<IRepositoryContextFactory>(op => new SqlRepositoryCon
 //Service
 builder.Services.AddScoped<IComputeObjectXmlService, ComputeObjectXmlService>();
 builder.Services.AddScoped<IAccountService>(op => new AccountService(op.GetRequiredService<IRepositoryContextFactory>()));
+builder.Services.AddScoped<IUserProfileService>(op => new UserProfileService(op.GetRequiredService<IRepositoryContextFactory>()));
 
 //Controllers
 builder.Services.AddControllers();
@@ -38,6 +39,7 @@ builder.Services.AddMvc(options => options.EnableEndpointRouting = false);
 builder.Services.AddMvc()
     .AddApplicationPart(typeof(XmlReader.WEB.Controllers.ComputeObjectController).Assembly)
     .AddApplicationPart(typeof(XmlReader.WEB.Controllers.AccountController).Assembly)
+    .AddApplicationPart(typeof(XmlReader.WEB.Controllers.UserProfileController).Assembly)
     .AddControllersAsServices();
 
 var app = builder.Build();

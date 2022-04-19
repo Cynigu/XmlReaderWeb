@@ -10,5 +10,6 @@ namespace XmlReader.BLL.Service.Interfaces
     public interface IUserProfileService
     {
         UserInfo GetUserInfoByLogin(string login);
+        Task<ICollection<UserInfo>> GetUsersInfosByLoginAsync(string searchStr);
     }
 }

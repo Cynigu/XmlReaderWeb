@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using XmlReader.BLL.DTO;
+using XmlReader.BLL.Models;
 using XmlReader.BLL.Models.AuthModels;
 using XmlReader.BLL.Models.Models;
 using XmlReader.BLL.Service.Interfaces;
@@ -37,21 +38,13 @@ public class UserProfileController : Controller
         }
     }
 
-    [HttpGet]
+    [HttpPost]
     [Authorize(Roles = "admin")]
-    public ActionResult<ICollection<UserInfo>> GetUsersInfosByFilter(string searchStr)
+    public async Task<ICollection<UserInfo>> GetUsersInfosByFilterAsync([FromBody] Filter filter)
     {
-        try
-        {
-            //var userInfo = _userProfileService.GetUserInfoByLogin(login: HttpContext.User.Identity.Name);
 
-            //return userInfo;
-        }
-        catch
-        {
-            //return new BadRequestObjectResult(new { Message = "Аккаунт не найден" });
-        }
+        var users = await _userProfileService.GetUsersInfosByLoginAsync(filter.SearchStr);
+        return users;
 
-        return new List<UserInfo>();
     }
 }
