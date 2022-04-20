@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using XmlReader.BLL.DTO;
 using XmlReader.BLL.Models;
 using XmlReader.BLL.Models.AuthModels;
 using XmlReader.BLL.Models.Models;
@@ -34,17 +33,37 @@ public class UserProfileController : Controller
         }
         catch
         {
-            return new BadRequestObjectResult( new {Message = "Аккаунт не найден"});
+            return new BadRequestObjectResult(  "Аккаунт не найден");
         }
     }
 
     [HttpPost]
     [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "admin")]
-    public async Task<ICollection<UserInfo>> GetUsersInfosByFilterAsync([FromBody] Filter filter)
+    public async Task<ActionResult< ICollection<UserInfo>>> GetUsersInfosByFilterAsync([FromBody] Filter filter)
     {
+        try
+        {
+            var users = await _userProfileService.GetUsersInfosByLoginAsync(filter.SearchStr);
+            return this.Ok(users);
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
+    }
 
-        var users = await _userProfileService.GetUsersInfosByLoginAsync(filter.SearchStr);
-        return users;
-
+    [HttpPost]
+    [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme, Roles = "admin")]
+    public async Task<ActionResult> DeleteUserInfosByLoginAsync([FromBody] FilterLogin login)
+    {
+        try
+        {
+            await _userProfileService.DeleteUserByLoginAsync(login.Login);
+            return this.Ok();
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
     }
 }

@@ -2,15 +2,17 @@ async function onloadFunction() {
     let menuItemUsers = document.getElementById('menu__item-users');
     let menuItemHome = document.getElementById('menu__item-home');
     let menuItemLogout = document.getElementById('menu__item-logout');
-    let login = document.getElementById('login');
+    let searchStr = document.getElementById('login');
     let buttonFindUsers = document.getElementById('button__find-user');
+    let buttonResreshTable = document.getElementById('button__refresh-table');
 
     menuItemHome.addEventListener('click', event => openTab(event, "home"));
     menuItemUsers.addEventListener('click', event => openTab(event, "users"));
-    menuItemUsers.addEventListener('click', async () => findUsersAsync(login));
+    menuItemUsers.addEventListener('click', async () => findUsersAsync(searchStr.value));
     menuItemLogout.addEventListener('click', () => _logout());
 
-    buttonFindUsers.addEventListener('click', async () => findUsersAsync(login));
+    buttonFindUsers.addEventListener('click', async () => findUsersAsync(searchStr.value));
+    buttonResreshTable.addEventListener('click', async () => findUsersAsync(searchStr.value));
 }
 
 function openTab(evt, tabName) {
@@ -34,29 +36,30 @@ function openTab(evt, tabName) {
     evt.currentTarget.className += " active";
 }
 
-async function findUsersAsync(login) {
+async function findUsersAsync(searchStr) {
     var url = '/api/UserProfile/GetUsersInfosByFilter';
-    var searchStr = login.value ?? "";
+    var searchStr = searchStr;
     fetch(url,
         {
             method: 'POST',
-            headers: { "Accept": "application/json" , 'Content-Type': 'application/json' },
-            body: JSON.stringify({searchStr: searchStr})
+            headers: { "Accept": "application/json", 'Content-Type': 'application/json' },
+            body: JSON.stringify({ searchStr: searchStr })
         })
-        .then(response => response.json())
-        .then(data => _displayUsersInfo(data))
-        .catch(ex => 
+        .then(response => response.json()
+            .then(data => _displayUsersInfo(data))
+        )
+        .catch(ex =>
             window.alert(ex.message)
         );
 }
 
 function _displayUsersInfo(data) {
-    // Добавить кнопку "удалить"
-    var tbody = document.getElementById('table-users-body');
-    while (tbody.rows.length > 0) tbody.rows[0].remove();
+    var thead =  document.getElementById('table-users-head');
+    while (thead.rows.length > 0) thead.rows[0].remove();
 
     // Создаем основную строку
     let mainRow = document.createElement('tr');
+    thead.appendChild(mainRow);
 
     // Заполняем заголовки
     let th1 = document.createElement('th');
@@ -66,13 +69,15 @@ function _displayUsersInfo(data) {
     let th5 = document.createElement('th');
     let th6 = document.createElement('th');
     let th7 = document.createElement('th');
+    let th8 = document.createElement('th');
     th1.innerHTML = "Логин";
     th2.innerHTML = "Пароль";
     th3.innerHTML = "Имя";
     th4.innerHTML = "Мейл";
     th5.innerHTML = "Вк";
     th6.innerHTML = "Номер телефона";
-    th7.innerHTML = "       ";
+    th7.innerHTML = "Роль";
+    th8.innerHTML = ""; // Добавить кнопку "удалить"
     mainRow.appendChild(th1);
     mainRow.appendChild(th2);
     mainRow.appendChild(th3);
@@ -80,11 +85,21 @@ function _displayUsersInfo(data) {
     mainRow.appendChild(th5);
     mainRow.appendChild(th6);
     mainRow.appendChild(th7);
+    mainRow.appendChild(th8);
+
+    var tbody = document.getElementById('table-users-body');
+    while (tbody.rows.length > 0) tbody.rows[0].remove();
 
     data.forEach(element => {
         // Создаем основную строку
         let row = document.createElement('tr');
+        tbody.appendChild(row);
 
+        // кнопка 
+        let buttonDelete = document.createElement('button');
+        buttonDelete.addEventListener('click', async () => deleteAccountByLogin(element.login));
+        buttonDelete.innerHTML = "Удалить";
+        
         let td1 = document.createElement('td');
         let td2 = document.createElement('td');
         let td3 = document.createElement('td');
@@ -92,13 +107,16 @@ function _displayUsersInfo(data) {
         let td5 = document.createElement('td');
         let td6 = document.createElement('td');
         let td7 = document.createElement('td');
+        let td8 = document.createElement('td');
         td1.innerHTML = element.login;
         td2.innerHTML = element.password;
         td3.innerHTML = element.name;
         td4.innerHTML = element.email;
         td5.innerHTML = element.vk;
         td6.innerHTML = element.numberPhone;
-        td7.innerHTML = "Тут будет кнопка наверно";
+        td7.innerHTML = element.role;
+        td8.appendChild(buttonDelete);
+
         row.appendChild(td1);
         row.appendChild(td2);
         row.appendChild(td3);
@@ -106,30 +124,43 @@ function _displayUsersInfo(data) {
         row.appendChild(td5);
         row.appendChild(td6);
         row.appendChild(td7);
+        row.appendChild(td8);
     });
 }
 
+async function deleteAccountByLogin(login){
+    var url = '/api/UserProfile/DeleteUserInfosByLogin';
+    fetch(url,
+        {
+            method: 'POST',
+            headers: { "Accept": "application/json", 'Content-Type': 'application/json' },
+            body: JSON.stringify({ login: login })
+        })
+        .then(response => {if(!response.ok) throw new Error("Не удалось удалить")})
+        .catch( 
+            (ex) =>{
+                window.alert(ex.message)
+            }
+        );
+    await findUsersAsync("");
+}
 
-function _logout(){
+function _logout() {
     var url = '/api/Account/Logout';
     fetch(url,
         {
             method: 'GET',
-            headers: {'Content-Type': 'application/json' },
+            headers: { 'Content-Type': 'application/json' },
         })
         .then(response => response.text())
         .then(data => {
-            if (data == "logout"){
+            if (data == "logout") {
                 document.location.href = "../index.html";
             }
         })
         .catch(
             (e) => {
-            window.alert('Error: ' + e.message);
+                window.alert('Error: ' + e.message);
             }
         );
-}
-
-async function _postRequestJsonAsync(requestClass, url) {
-    
 }

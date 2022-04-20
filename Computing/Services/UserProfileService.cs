@@ -33,9 +33,11 @@ namespace XmlReader.BLL.Service.Services
                 {
                     throw new ArgumentException("Никого с таким логином не найдено");
                 }
-                // Запоминаем логин и пароль
+
+                // Запоминаем логин и пароль и роль
                 userInfo.Login = account.Login;
                 userInfo.Password = account.Password;
+                userInfo.Role = account.Role;
 
                 // По id аккаунта находим профиль пользователя 
                 var profile = uow.UserProfileRepository.GetEntityQuery().FirstOrDefault(x => x.AuthUserId == account.Id);
@@ -68,6 +70,7 @@ namespace XmlReader.BLL.Service.Services
                     .Select(user => new UserInfo()
                     {
                         Login = user.Login,
+                        Role = user.Role,
                         Password = user.Password,
                         Name = user.UserProfile.Name,
                         NumberPhone = user.UserProfile.NumberPhone,
@@ -78,6 +81,19 @@ namespace XmlReader.BLL.Service.Services
             }
 
             return users;
+        }
+
+        public async Task DeleteUserByLoginAsync(string login)
+        {
+            using (var uow = new UnitOfWork(_repositoryContextFactory.Create()))
+            {
+                var user = uow.AuthUserRepository.GetEntityQuery().FirstOrDefault(x => x.Login == login);
+                if (user == null)
+                    throw new ArgumentException("Пользователя с таким логином не существует");
+                if (user.Role == "admin")
+                    throw new Exception("Нельзя удалить профиль админа");
+                await uow.AuthUserRepository.RemoveRangeAsync(x => x.Login == login);
+            }
         }
     }
 }

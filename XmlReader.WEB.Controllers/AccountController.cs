@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using XmlReader.BLL.DTO;
 using XmlReader.BLL.Models.AuthModels;
 using XmlReader.BLL.Models.Models;
 using XmlReader.BLL.Service.Interfaces;
@@ -35,7 +34,7 @@ public class AccountController : Controller
         }
         else
         {
-            return new BadRequestObjectResult(new { Message = "Роль не найдена" });
+            return new BadRequestObjectResult("Роль не найдена");
         }
     }
 
@@ -50,7 +49,7 @@ public class AccountController : Controller
             return Content(user.Role);
         }
 
-        return new BadRequestObjectResult(new { Message = "Некорректные логин и(или) пароль" });
+        return new BadRequestObjectResult("Некорректные логин и(или) пароль");
     }
 
     [HttpPost]
@@ -67,7 +66,7 @@ public class AccountController : Controller
                 return Content( userRegistred.Role);
             }
         }
-        return new BadRequestObjectResult(new { Message = "Такой пользователь уже существует!" });
+        return new BadRequestObjectResult("Такой пользователь уже существует!");
     }
 
     private async Task AuthenticateAsync(UserModel model)

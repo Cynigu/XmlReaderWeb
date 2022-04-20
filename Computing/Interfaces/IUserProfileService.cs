@@ -11,5 +11,6 @@ namespace XmlReader.BLL.Service.Interfaces
     {
         UserInfo GetUserInfoByLogin(string login);
         Task<ICollection<UserInfo>> GetUsersInfosByLoginAsync(string searchStr);
+        Task DeleteUserByLoginAsync(string login);
     }
 }

@@ -44,7 +44,7 @@ function Register(nameId, numberPhoneId, vkId, emailId, passId, passTwoId, login
                 document.location.href = "html/admin.html";
             }
             else {
-                window.alert(data);
+                throw new Error(data);
             }
         })
         .catch(

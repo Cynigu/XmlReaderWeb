@@ -9,6 +9,7 @@ namespace XmlReader.BLL.Models.Models
     public class UserInfo
     {
         public string Login { get; set; }
+        public string Role { get; set; }
         public string? Name { get; set; }
         public string? Email { get; set; }
         public string? Vk { get; set; }

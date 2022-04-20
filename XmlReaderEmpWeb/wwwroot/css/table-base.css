@@ -7,21 +7,26 @@
     margin-top: 3px;
 }
 
-table, .table{
-    flex: 0;
+table button{
     width: 100%;
-    border-collapse: collapse;
 }
 
+table, .table{
+    flex: 0;
+    border-collapse: collapse;
+    min-width: 900px;
+}
+  
 .table thead, table thead{
     background-color: var(--table-header-color);
 }
 
 .table th, .table td, table th, table td{
-    padding: 1%;
+    padding: 10px;
     border: 1px solid var(--table-border);
     border-collapse: collapse;
     text-align: left;
+    min-width: 110px;
 }
 
 .table tr:hover td, table tr:hover td{
@@ -35,3 +40,4 @@ table, .table{
     flex-direction: row-reverse;
     flex-wrap: wrap;
 }
+
