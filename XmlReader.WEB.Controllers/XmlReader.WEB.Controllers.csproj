@@ -7,25 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="EmployeeControllers\EmployeeBaseController.cs" />
-    <Compile Remove="FolderControllers\FolderBaseController.cs" />
-    <Compile Remove="WorkControllers\WorkBaseController.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="6.0.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Computing\XmlReader.BLL.Service.csproj" />
     <ProjectReference Include="..\XmlReader.BLL.Mapper\XmlReader.BLL.Mapper.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="EmployeeControllers\" />
-    <Folder Include="FolderControllers\" />
-    <Folder Include="WorkControllers\" />
   </ItemGroup>
 
 </Project>

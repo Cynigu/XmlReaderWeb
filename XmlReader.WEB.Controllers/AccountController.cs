@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using XmlReader.BLL.Models.AuthModels;
@@ -15,6 +16,7 @@ namespace XmlReader.WEB.Controllers;
 public class AccountController : Controller
 {
     private readonly IAccountService _accountService;
+    private byte[] salt = new byte[128/8]{ 123, 22, 44, 54,64,54,46,67,76,76,16,13,144,9,1,1 };
     public AccountController(IAccountService accountService)
     {
         _accountService = accountService;
@@ -41,6 +43,13 @@ public class AccountController : Controller
     [HttpPost]
     public async Task<ActionResult> LoginAsync([FromBody] LoginModel model)
     {
+        model.Password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+            password: model.Password,
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8));
+
         var user = _accountService.FindAccountByLoginPasswordAsync(model);
 
         if (user != null)
@@ -58,6 +67,13 @@ public class AccountController : Controller
         var user = await _accountService.FindAccountByLoginAsync(model.Login);
         if (user == null)
         {
+            model.Password = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: model.Password, 
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA256, 
+                iterationCount: 100000, 
+                numBytesRequested: 256 / 8));
+
             await _accountService.RegisterAccountAsync(model);
             var userRegistred = await _accountService.FindAccountByLoginAsync(model.Login);
             if (userRegistred != null)
